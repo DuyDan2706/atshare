@@ -151,8 +151,8 @@ export const UpdateModal = (props: any) => {
     'xanh lá'
   ];
   const carFuel = [
-    'Xăng ',
-    'Dầu ',
+    'Xăng',
+    'Dầu',
     'Điện',
   ];
 
