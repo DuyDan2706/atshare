@@ -495,8 +495,8 @@ export default function StatisticCar() {
     setPageCar(0);
   };
   const dataLoad = [{}, {}, {}, {},];
-  const dataLoadCar = [{}, {}, {}, {}, {}];
-  const dataLoadRow = [{}, {}, {}, {}, {}, {}, {}, {}];
+  const dataLoadCar = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},];
+  const dataLoadRow = [{}, {}, {}, {}, {}, {}];
   const dataLoadRowCar = [{}, {}, {}, {}, {}, {}];
   console.log("hai", etcmoneyUsingSum, page, rowsPerPage);
   const buttonView = () => (
@@ -596,26 +596,26 @@ export default function StatisticCar() {
                 </TableHead>
                 <TableBody component="div">
                   {loading == true ? (
-                  dataLoadCar.map((row, index) => {
-                    return (
-                      <TableRow
-                        component="div"
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={index} // <-- unique key prop
-                      >
-                        {dataLoadRow.map((column, index) => {
-                          return (
-                            <TableCell component="div" key={index}>
-                              <Skeleton
-                                variant="rectangular"
-                                width="100%"
-                                height={20}
-                              />
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
+                    dataLoadCar.map((row, index) => {
+                      return (
+                        <TableRow
+                          component="div"
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={index} // <-- unique key prop
+                        >
+                          {dataLoadRow.map((column, index) => {
+                            return (
+                              <TableCell component="div" key={index}>
+                                <Skeleton
+                                  variant="rectangular"
+                                  width="100%"
+                                  height={20}
+                                />
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
                       );
                     })
                   ) : (
@@ -660,7 +660,7 @@ export default function StatisticCar() {
                                     key={column.id}
                                     align={column.align}
                                     className="h-10 py-1 px-3"
-                                    
+
                                   >
                                     {column.format &&
                                       typeof value === "number"

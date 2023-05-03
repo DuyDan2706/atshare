@@ -99,7 +99,7 @@ export const PopupUser = (props: any) => {
   let filter = {
     pagination: pagination,
     searchName: "",
-    searchEmail:"",
+    searchEmail: "",
     searchPhoneNumber: "",
   };
   const getUserAPi = () => {
@@ -126,21 +126,21 @@ export const PopupUser = (props: any) => {
   const phoneNumberValidation = yup
     .string()
     .matches(/^((\+84)|0)\d{9,10}$/, "Số điện thoại không hợp lệ");
-    const [selectedFrontImage, setSelectedFrontImage] = useState<File | null>(null);
-    const [selectedImageFrontUrl, setSelectedImageFrontUrl] = useState<string | null>(null);
-    const [selectedFrontOption, setSelectedFrontOption] = useState<string | null>(null);
-    
-    const handleFileFrontInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.files) {
-        setSelectedFrontOption("file")
-        const file2 = event.target.files[0];
-        setSelectedFrontImage(file2);
-        const url2 = URL.createObjectURL(file2);
-        setSelectedImageFrontUrl(url2)
-        frmUser.setFieldValue("cardImage", url2);
-      }
-    };
-  
+  const [selectedFrontImage, setSelectedFrontImage] = useState<File | null>(null);
+  const [selectedImageFrontUrl, setSelectedImageFrontUrl] = useState<string | null>(null);
+  const [selectedFrontOption, setSelectedFrontOption] = useState<string | null>(null);
+
+  const handleFileFrontInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setSelectedFrontOption("file")
+      const file2 = event.target.files[0];
+      setSelectedFrontImage(file2);
+      const url2 = URL.createObjectURL(file2);
+      setSelectedImageFrontUrl(url2)
+      frmUser.setFieldValue("cardImage", url2);
+    }
+  };
+
   const initialValues = {
     id: 0,
     name: "",
@@ -249,21 +249,25 @@ export const PopupUser = (props: any) => {
       }),
     }),
 
-    
-      onSubmit: async (values: UserModel, { setSubmitting }) => {
+
+    onSubmit: async (values: UserModel, { setSubmitting }) => {
       if (isAdd === true) {
         const promises = [];
         if (selectedFrontImage) {
           const frontImageRef = ref(storage, `car/${selectedFrontImage.name + v4()}`);
           const frontSnapshot = uploadBytes(frontImageRef, selectedFrontImage);
           promises.push(frontSnapshot);
+          
+        }  else {
+          values.cardImage = userDad?.cardImage; // Set current URL if no new image selected
         }
-        
-    const snapshots = await Promise.all(promises);
 
-    const urls = await Promise.all(
-      snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
-    );
+
+        const snapshots = await Promise.all(promises);
+
+        const urls = await Promise.all(
+          snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
+        );
         values.cardImage = urls[0];
         const actionAsyncLogin = postProfileAsyncApi({ ...values, parkingLotId: values.role == "OperatorStaff" ? values.parkingLotId : null });
         dispatch(actionAsyncLogin)
@@ -288,14 +292,18 @@ export const PopupUser = (props: any) => {
           const frontImageRef = ref(storage, `car/${selectedFrontImage.name + v4()}`);
           const frontSnapshot = uploadBytes(frontImageRef, selectedFrontImage);
           promises.push(frontSnapshot);
+        }  else {
+          values.cardImage = userDad?.cardImage; // Set current URL if no new image selected
         }
-        
-    const snapshots = await Promise.all(promises);
 
-    const urls = await Promise.all(
-      snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
-    );
-    values.cardImage = urls[0];
+
+        const snapshots = await Promise.all(promises);
+
+        const urls = await Promise.all(
+          snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
+        );
+      
+        if (urls[0]) values.cardImage = urls[0];
         const actionAsyncLogin = putProfileAsyncApi({ ...values, parkingLotId: values.role == "OperatorStaff" ? values.parkingLotId : null });
         dispatch(actionAsyncLogin)
           .then((response) => {
@@ -305,6 +313,7 @@ export const PopupUser = (props: any) => {
               parentCallback(false);
               getProfileAPi();
               parentCallbackAlert("success");
+              getUserAPi()
               parentCallbackMessageAlert("Cập nhật thành công");
             }
           })
@@ -369,7 +378,7 @@ export const PopupUser = (props: any) => {
     if (userDad === "{}") {
       frmUser.setValues(initialValues);
     }
-  
+
   }, [openDad]);
 
   useEffect(() => {
@@ -410,7 +419,7 @@ export const PopupUser = (props: any) => {
       </div>
     );
   }
-console.log("dan11111111111111111111111111111111111",frmUser.values)
+  console.log("dan11111111111111111111111111111111111", frmUser.values)
   const renderPopupUI = () => {
     return (
       <>
@@ -648,7 +657,7 @@ console.log("dan11111111111111111111111111111111111",frmUser.values)
                       </div>
                     )}
                   </div>
-               
+
                   <div className="h-16 ">
                     <FormControl fullWidth>
                       <InputLabel size="small" id="demo-simple-select-label">Vị trí*</InputLabel>
@@ -707,51 +716,51 @@ console.log("dan11111111111111111111111111111111111",frmUser.values)
                       )}
                   </div>
                   <div className="h-16">
-                  <FormControl className="mb-2" >
-                  <div className="item_box_image1 ">
-                    <Button
-                      variant="contained"
-                      component="label"
-                      className="bg-white text-[#1976d2] shadow-none rounded-md "
-                    >
-                      <AddPhotoAlternateIcon />Ảnh  đại diện *
-                      <input
-                        type="file"
-                        hidden
-                        id="image3"
-                        onChange={handleFileFrontInputChange}
-                      />
-                    </Button>
-                    {frmUser.touched.cardImage &&
-                      frmUser.errors.cardImage && (
-                        <div className="text-red-600">
-                          {frmUser.errors.cardImage}
-                        </div>
-                      )}
+                    <FormControl className="mb-2" >
+                      <div className="item_box_image1 ">
+                        <Button
+                          variant="contained"
+                          component="label"
+                          className="bg-white text-[#1976d2] shadow-none rounded-md "
+                        >
+                          <AddPhotoAlternateIcon />Ảnh  đại diện *
+                          <input
+                            type="file"
+                            hidden
+                            id="image3"
+                            onChange={handleFileFrontInputChange}
+                          />
+                        </Button>
+                        {frmUser.touched.cardImage &&
+                          frmUser.errors.cardImage && (
+                            <div className="text-red-600">
+                              {frmUser.errors.cardImage}
+                            </div>
+                          )}
 
-                    {selectedFrontImage == undefined ? (
-                      <img
-                        alt=""
-                        className="mx-auto h-24 w-24 my-5"
-                        src={userDad?.cardImage}
-                      />
-                    ) : (
-                      selectedFrontImage && (
-                        <img
-                          alt=""
-                          className="mx-auto h-24 w-24 my-5"
-                          src={
-                            selectedFrontImage ? window.URL.createObjectURL(selectedFrontImage) : ''
-                          }
-                        />
-                      )
-                    )}
+                        {selectedFrontImage == undefined ? (
+                          <img
+                            alt=""
+                            className="mx-auto h-24 w-24 my-5"
+                            src={userDad?.cardImage}
+                          />
+                        ) : (
+                          selectedFrontImage && (
+                            <img
+                              alt=""
+                              className="mx-auto h-24 w-24 my-5"
+                              src={
+                                selectedFrontImage ? window.URL.createObjectURL(selectedFrontImage) : ''
+                              }
+                            />
+                          )
+                        )}
+                      </div>
+                    </FormControl>
+
+
                   </div>
-                </FormControl>
 
-
-                  </div>
-                
                 </div>
               </div>
             </DialogContent>

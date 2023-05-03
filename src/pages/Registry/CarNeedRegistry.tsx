@@ -50,17 +50,17 @@ const columns: readonly Column[] = [
   { id: "edit", label: "Chi tiết", minWidth: 100 },
 ];
 
-export default function CarNeedRegistry({}: Props) {
-  const { CarNeedRegistry,loading } = useSelector((state: RootState) => state.CarResult);
+export default function CarNeedRegistry({ }: Props) {
+  const { CarNeedRegistry, loading } = useSelector((state: RootState) => state.CarResult);
 
-  const [rowsPerPage, setRowsPerPage] = useState(11);
+  const [rowsPerPage, setRowsPerPage] = useState(13);
   const [page, setPage] = useState(0);
   const userString = localStorage.getItem("user");
   const userProfile = userString ? JSON.parse(userString) : null;
   const parkingLotId = userProfile?.parkingLotId;
   const [pagination, setPagination] = useState({
     page: 1,
-    pageSize: 11,
+    pageSize: 13,
 
   });
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -74,7 +74,7 @@ export default function CarNeedRegistry({}: Props) {
     setPagination({ page: 1, pageSize: +event.target.value });
     setPage(0);
   };
-  console.log("dan",CarNeedRegistry.total)
+  console.log("dan", CarNeedRegistry.total)
   const dispatch: DispatchType = useDispatch();
 
   let getAllcarmaitance: () => void;
@@ -98,40 +98,40 @@ export default function CarNeedRegistry({}: Props) {
       dispatch(actionAsync);
     };
   }
-  
+
   useEffect(() => {
     getAllcarmaitance();
-  }, [pagination  ]);
- 
+  }, [pagination]);
+
 
   const rows = CarNeedRegistry.cars.map((data: any, index: number) => {
     return createData(data, index, page);
   });
   function createData(data: any, index: number, page: number) {
     const encodedId = btoa(data.id);
-    let modelName = ( 
+    let modelName = (
       <Tooltip title="Chi tiết Xe">
-      <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
-      <button className="flex gap-2  hover:bg-gray-200 bg-gray-100 px-2 py-1 border-[1px] rounded-2xl hover:text-gray-600">
- <TimeToLeaveOutlinedIcon className="h-6 w-6" />
- <p className="">{data.modelName}</p>
-</button>
-</Link>
-</Tooltip>
-)
-  let carColor = ( <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
-  <ColorLensOutlinedIcon className="h-6 w-6" />
-  <p className="">{data.carColor}</p>
- </button>)
+        <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
+          <button className="flex gap-2  hover:bg-gray-200 bg-gray-100 px-2 py-1 border-[1px] rounded-2xl hover:text-gray-600">
+            <TimeToLeaveOutlinedIcon className="h-6 w-6" />
+            <p className="">{data.modelName}</p>
+          </button>
+        </Link>
+      </Tooltip>
+    )
+    let carColor = (<button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
+      <ColorLensOutlinedIcon className="h-6 w-6" />
+      <p className="">{data.carColor}</p>
+    </button>)
     //let registrationDeadline = data.registrationDeadline;
     let formattedSregistrationDeadline = new Date(data.registrationDeadline).toLocaleDateString();
 
-    let carLicensePlates =( 
-    
-    <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-xl ">
-     <PaymentOutlinedIcon className="h-6 w-6" />
-    <p className="">{data.carLicensePlates.slice(0, 3) + '-' +data.carLicensePlates.slice(3)}</p>
-   </button>)
+    let carLicensePlates = (
+
+      <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-xl ">
+        <PaymentOutlinedIcon className="h-6 w-6" />
+        <p className="">{data.carLicensePlates.slice(0, 3) + '-' + data.carLicensePlates.slice(3)}</p>
+      </button>)
     let id = data.id;
     let stt = page * rowsPerPage + (index + 1);
 
@@ -149,112 +149,112 @@ export default function CarNeedRegistry({}: Props) {
     } else if (userProfile.role === "Admin") {
       edit = (
         <Tooltip title="Chi tiết đăng kiểm">
-              <Link to={`/Admin/CarNeedRegistry/CarNeedRegistryDetail/${encodedId}`}>
-          <IconButton>
+          <Link to={`/Admin/CarNeedRegistry/CarNeedRegistryDetail/${encodedId}`}>
+            <IconButton>
               <EditOutlinedIcon className="text-gray-400" />
-          </IconButton>
+            </IconButton>
           </Link>
         </Tooltip>
       );
     }
 
-    return { modelName,  stt, edit, carLicensePlates, id,carColor,registrationDeadline:formattedSregistrationDeadline};
+    return { modelName, stt, edit, carLicensePlates, id, carColor, registrationDeadline: formattedSregistrationDeadline };
   }
-  const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  const dataLoadRow = [{}, {}, {}, {}, {},{}];
+  const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+  const dataLoadRow = [{}, {}, {}, {}, {}, {}];
   return (
-    <div className=" mx-5 mb-5 mt-14 ">
+    <div className=" mx-5 mb-5 mt-10 ">
       <Paper sx={{ overflow: "hidden" }} className="">
-          <TableContainer sx={{ minHeight: 740, maxHeight: 700 }}>
-            <Table component="div"  aria-label="sticky table">
-              <TableHead  component="div">
-                <TableRow
-                  sx={{
-                    backgroundColor: "rgb(219 234 254)",
-                  }}
-                  component="div"
-                >
-                  {columns.map((column) => (
-                    <TableCell
+        <TableContainer sx={{ minHeight: 750, maxHeight: 700 }}>
+          <Table component="div" aria-label="sticky table">
+            <TableHead component="div">
+              <TableRow
+                sx={{
+                  backgroundColor: "rgb(219 234 254)",
+                }}
+                component="div"
+              >
+                {columns.map((column) => (
+                  <TableCell
+                    component="div"
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                    className="font-bold"
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody component="div">
+              {loading == true
+                ? dataLoad.map((row, index) => {
+                  return (
+                    <TableRow
                       component="div"
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                      className="font-bold"
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={index}
                     >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody component="div">
-                {loading == true
-                  ? dataLoad.map((row, index) => {
-                      return (
-                        <TableRow
-                          component="div"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={index}
-                        >
-                          {dataLoadRow.map((column, index) => {
-                            return (
-                              <TableCell component="div" key={index}>
-                                <Skeleton
-                                  variant="rectangular"
-                                  width="100%"
-                                  height={20}
-                                />
-                              </TableCell>
-                            );
-                          })}
-                        </TableRow>
-                      );
-                    })
-                  : rows.map((row, index) => {
-                      return (
-                        <TableRow
-                          component="div"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={index}
-                        >
-                          {columns.map((column) => {
-                            const value = row[column.id];
-                            return (
-                              <TableCell
-                                component="div"
-                                key={column.id}
-                                align={column.align}
-                                className="py-[6px] px-3"
-                              >
-                                {column.format && typeof value === "number"
-                                  ? column.format(value)
-                                  : value}
-                              </TableCell>
-                            );
-                          })}
-                        </TableRow>
-                      );
-                    })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          
-          <TablePagination
-              labelRowsPerPage={"Số lượng của trang"}
-              rowsPerPageOptions={[11, 25, 100]}
-              labelDisplayedRows={({ from, to, count }) =>
-                `${from}-${to} trên ${count}`
-              }
-              component="div"
-              count={CarNeedRegistry.total} 
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-    </Paper>
-  </div>
+                      {dataLoadRow.map((column, index) => {
+                        return (
+                          <TableCell component="div" key={index}>
+                            <Skeleton
+                              variant="rectangular"
+                              width="100%"
+                              height={20}
+                            />
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })
+                : rows.map((row, index) => {
+                  return (
+                    <TableRow
+                      component="div"
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={index}
+                    >
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell
+                            component="div"
+                            key={column.id}
+                            align={column.align}
+                            className="py-[6px] px-3"
+                          >
+                            {column.format && typeof value === "number"
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <TablePagination
+          labelRowsPerPage={"Số lượng của trang"}
+          rowsPerPageOptions={[13, 25, 100]}
+          labelDisplayedRows={({ from, to, count }) =>
+            `${from}-${to} trên ${count}`
+          }
+          component="div"
+          count={CarNeedRegistry.total}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </div>
   )
 }

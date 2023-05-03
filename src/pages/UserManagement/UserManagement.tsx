@@ -68,7 +68,7 @@ const columns: readonly Column[] = [
     id: "stt",
     label: "Stt",
     minWidth: 50,
-    align: "left",
+    align: "center",
   },
   { id: "email", label: "Email", minWidth: 150 },
   { id: "name", label: "Họ và tên", minWidth: 200 },
@@ -100,7 +100,7 @@ const columns: readonly Column[] = [
   { id: "edit", label: "Thao tác", minWidth: 100, align: "center" },
 ];
 export default function UserManagement() {
-  
+
   const [isPresent, setIsPresent] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -261,7 +261,7 @@ export default function UserManagement() {
             : "Sale";
     let status = (
       <>
-        <div  onClick={() => handleClickOpenDelete(data.id)}>
+        <div onClick={() => handleClickOpenDelete(data.id)}>
           {data.isDeleted == false ? (
             <Tooltip title="Đang hoạt động">
               <IconButton>

@@ -20,7 +20,7 @@ export default function Calendar({ }: Props) {
   const [open1, setOpen1] = useState(false);
   const [messageAlert, setMessageAlert] = useState("");
   const [alert, setAlert] = useState("");
- 
+
   let callbackFunctionAlert = (childData: any) => {
     setAlert(childData);
   };
@@ -66,12 +66,12 @@ export default function Calendar({ }: Props) {
     setOpen(true);
     dispatch(CarscheduleAction.showPopup());
   };
- 
+
   const [id, setid] = useState<number | null>(null);
   const [event, setEvent] = useState(null);
   const [carStatusId, setCarStatusId] = useState<number>(0);
   const [carId, setCarId] = useState<number>(0);
-  const handleClickOpenUpdate = (event: any, id: number, carid: number, carstatusid: number, car:object) => {
+  const handleClickOpenUpdate = (event: any, id: number, carid: number, carstatusid: number, car: object) => {
 
     setOpen1(true);
     setUserDad(car);
@@ -152,8 +152,8 @@ export default function Calendar({ }: Props) {
 
 
   return (
-    <div className="w-full p-10 bg-white ">
-      <div className="  xl:flex mb-5 w-full -mt-8">
+    <div className="w-full py-8 px-5 bg-white relative ">
+      <div className="  xl:flex mb-2 w-full  absolute right-48 top-[32px]">
         <div className="ml-auto flex justify-between flex-wrap  gap-5 ">
           <Button
             className="text-gray-600 h-10 hover:text-green-400  border-gray-400 shadow-lg"
@@ -167,7 +167,6 @@ export default function Calendar({ }: Props) {
 
         </div>
       </div>
-
       <FullCalendar
         plugins={[timeGridWeek, resourceTimelinePlugin]}
         locale={vnLocale}

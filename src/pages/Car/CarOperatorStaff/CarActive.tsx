@@ -47,11 +47,12 @@ import { carAction, getcaractiveAsyncApi } from '../../../redux/CarReducer/CarRe
 import { DispatchType, RootState } from '../../../redux/store';
 import { Modal } from '../Modal/Modal';
 import Pagination1 from '../../../layouts/Layout/Paginaton';
+import { getcarStatusAsyncApi } from '../../../redux/CarStatus/CarStatusReducer';
 interface Column {
   id: "stt" | "modelName" | "carColor" | "seatNumber" | "carFuel" | "carLicensePlates" | "status"|  "edit";
   label: string;
   minWidth?: number;
-  align?: "left";
+  align?: "left" | "center";
   format?: (value: number) => string;
 }
 const columns: readonly Column[] = [
@@ -86,7 +87,7 @@ const columns: readonly Column[] = [
     id: "status",
     label: "Trạng thái",
     minWidth: 180,
-    align: "left",
+    align: "center",
   },
   { id: "edit", label: "Chi tiết", minWidth: 100 },
 ];
@@ -162,10 +163,10 @@ export default function CarActive() {
     setAlert(childData);
   };
 
-//   const getAllCarStatus = () => {
-//     const actionAsync = (getcarStatusAsyncApi());
-//     dispatch(actionAsync);
-//   }
+  const getAllCarStatus = () => {
+    const actionAsync = (getcarStatusAsyncApi());
+    dispatch(actionAsync);
+  }
 
 
 
@@ -211,7 +212,7 @@ export default function CarActive() {
 
   useEffect(() => {
     getAllcarActive()
-  
+    getAllCarStatus()
     if (showPopup == false) {
       setOpen(false);
     }
@@ -299,6 +300,7 @@ export default function CarActive() {
     return createData(data, index, page);
   });
   function createData(data: any, index: number, page: number) {
+    const encodedId = btoa(data.id);
  let modelName = (  <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
  <TimeToLeaveOutlinedIcon className="h-6 w-6" />
  <p className="">{data.modelName}</p>
@@ -357,53 +359,17 @@ export default function CarActive() {
         break;
     }
     
-    // let status = data.carStatus;
+
     let status = (
-      <button className={`flex gap-2  px-2 py-1 border-[1px] rounded-md  ${statusColor}`}>
+      <button className={`gap-2  px-4 py-1 border-[1px] rounded-md mx-auto w-[200px]  ${statusColor}`}>
         <p className="">{data.carStatus}</p>
       </button>
     );
-    // let availability = (<>
-
-
-    //   <div    className={data.isDeleted == false ? " bg-green-300 font-bold text-center text-green-700 p-2 rounded-md w-[125px]" : "w-[125px] bg-red-300 font-bold text-red-700  text-center p-2 rounded-md"} >
-    //     {data.isDeleted == false ? "Đang hoạt động" : "Tạm ngưng"}
-    //   </div>
-
-    //   <Menu
-    //     id="long-menu"
-    //     MenuListProps={{
-    //       "aria-labelledby": "long-button",
-    //     }}
-    //     defaultValue={data.isDeleted}
-    //     anchorEl={anchorEl1}
-    //     open={open2}
-    //     onClose={handleClose2}
-    //     PaperProps={{
-    //       style: {
-    //         maxHeight: 48 * 4.5,
-    //         width: "24ch"
-    //       },
-    //     }}
-    //   >
-    //     <MenuItem className="mx-2">
-    //       <ListItemIcon className={data.isDeleted == true ? "invisible" : ""}>
-    //         <Check />
-    //       </ListItemIcon>
-    //       Đang hoạt động
-    //     </MenuItem>
-    //     <MenuItem className="mx-2">
-    //       <ListItemIcon className={data.isDeleted == false ? "invisible" : ""}>
-    //         <Check />
-    //       </ListItemIcon>
-    //       Tạm ngưng
-    //     </MenuItem>
-    //   </Menu>
-    // </>);
+ 
     
     let stt = page * rowsPerPage + (index + 1);
    //let carLicensePlates = data.carLicensePlates.slice(0, 3) + '-' +data.carLicensePlates.slice(3);
-   let carLicensePlates =( <button className="flex gap-2  hover:bg-gray-200 bg-gray-100 px-2 py-1 border-[1px] rounded-xl hover:text-gray-600">
+   let carLicensePlates =( <button className="flex gap-2  mx-4 hover:bg-gray-200 bg-gray-100 px-2 py-1 border-[1px] rounded-xl hover:text-gray-600">
    <p className="">{data.carLicensePlates.slice(0, 3) + '-' +data.carLicensePlates.slice(3)}</p>
   </button>)
 
@@ -411,7 +377,7 @@ export default function CarActive() {
     let edit = (
       <Tooltip title="Chi tiết Xe" >
         <IconButton>
-          <Link to={`/Operator/CarActiveManagement/CarDetail/${data.id}`}>
+          <Link to={`/Operator/CarActiveManagement/CarDetail/${encodedId}`}>
             <EditOutlinedIcon className="text-gray-400" />
           </Link>
         </IconButton>

@@ -74,8 +74,8 @@ export default function CustomerinfoDetail({ }: Props) {
   const { contractgroup, loading } = useAppSelector(
     (state: RootState) => state.ContractGroup
   );
-  console.log("dan",contractgroup)
-  console.log("dan1",customerInfoDetail?.citizenIdentificationInfoNumber)
+  console.log("dan", contractgroup)
+  console.log("dan1", customerInfoDetail?.citizenIdentificationInfoNumber)
 
   const rows = contractgroup.contracts.map((data: any, index: number) => {
     return createData(data, index, page);
@@ -103,10 +103,10 @@ export default function CustomerinfoDetail({ }: Props) {
     const actionAsync = getCustomerinfoByCMNDReducerAsyncApi(decodedId);
     dispatch(actionAsync);
   }
-  
+
   const getContractAPi = () => {
     if (param.id) {
-      console.log("tests ",param.id)
+      console.log("tests ", param.id)
       const CitizenIdentificationInfoNumber: string = param.id;
       const decodedId = CitizenIdentificationInfoNumber ? atob(CitizenIdentificationInfoNumber) : "";
       const actionAsync = getCarContractgroupReducercarAsyncApi({
@@ -116,7 +116,7 @@ export default function CustomerinfoDetail({ }: Props) {
         },
         status: "",
         id: null,
-        CitizenIdentificationInfoNumber:decodedId,
+        CitizenIdentificationInfoNumber: decodedId,
       });
       dispatch(actionAsync);
     }
@@ -125,7 +125,7 @@ export default function CustomerinfoDetail({ }: Props) {
     getCustomerinfById()
     getContractAPi();
   }, [pagination])
-  
+
   function createData(data: any, index: number, page: number) {
     let id = data.id;
     let sales = (
@@ -141,9 +141,9 @@ export default function CustomerinfoDetail({ }: Props) {
       </button>
     );
 
- 
+
     let stt = page * rowsPerPage + (index + 1);
-   
+
     let rentFrom = new Date(data.rentFrom).toLocaleDateString();
     let rentTo = new Date(data.rentTo).toLocaleDateString();
     return { customer, id, sales, stt, rentFrom, rentTo };
@@ -152,7 +152,7 @@ export default function CustomerinfoDetail({ }: Props) {
 
 
 
-  
+
   const [selectedImage, setSelectedImage] = useState(null)
 
   let firstCharacter: string = "";
@@ -162,8 +162,8 @@ export default function CustomerinfoDetail({ }: Props) {
     firstCharacter = lastName.charAt(0);
   }
   console.log("!2", firstCharacter)
-  const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  const dataLoadRow = [{}, {}, {}, {}, {}, {}, {}];
+  const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},];
+  const dataLoadRow = [{}, {}, {}, {}, {},];
   return (
     <div className=" mt-2   ">
       <div className='flex justify-between '>
@@ -179,15 +179,15 @@ export default function CustomerinfoDetail({ }: Props) {
         </div> */}
         <div className="mt-8 ml-6 ">
 
-<Breadcrumbs className='mx-4 ' aria-label="breadcrumb">
-  <NavLink to="/Admin/Customerinfo" className="hover:underline">
-   Khách hàng
-  </NavLink>
-  <Typography className="text-sm" color="text.primary">
-    Chi tiết khách hàng
-  </Typography>
-</Breadcrumbs>
-</div>
+          <Breadcrumbs className='mx-4 ' aria-label="breadcrumb">
+            <NavLink to="/Admin/Customerinfo" className="hover:underline">
+              Khách hàng
+            </NavLink>
+            <Typography className="text-sm" color="text.primary">
+              Chi tiết khách hàng
+            </Typography>
+          </Breadcrumbs>
+        </div>
         <div className='flex '>
 
         </div>
@@ -220,25 +220,25 @@ export default function CustomerinfoDetail({ }: Props) {
             </span></h2>
             <div className="mt-2">
               <div className="flex   mx-1">
-              <h3 className='font-bold  '>  <EmailOutlinedIcon className="-mt-1 " />    Email:</h3>
+                <h3 className='font-bold  '>  <EmailOutlinedIcon className="-mt-1 " />    Email:</h3>
                 <p className=" mx-1"  >{customerInfoDetail?.customerEmail}  </p>
                 {/* <h3 className='font-bold '>  <LocalPhoneOutlinedIcon className="-mt-1 " /> Số điện thoại:</h3>
                 <p className=" mx-1 "  > {customerInfoDetail?.phoneNumber} </p> */}
               </div>
               <div className="flex mt-4  mx-1">
-              <h3 className='font-bold  '>   <LocationOnOutlinedIcon className="-mt-1 " /> Địa chỉ:</h3>
+                <h3 className='font-bold  '>   <LocationOnOutlinedIcon className="-mt-1 " /> Địa chỉ:</h3>
                 <p className=" mx-1"  >{customerInfoDetail?.customerAddress}</p>
-              
+
               </div>
 
               <div className="flex mt-4  mx-1">
-                  <h3 className='font-bold '>  <LocalPhoneOutlinedIcon className="-mt-1 " /> Số điện thoại:</h3>
+                <h3 className='font-bold '>  <LocalPhoneOutlinedIcon className="-mt-1 " /> Số điện thoại:</h3>
                 <p className=" mx-1 "  > {customerInfoDetail?.phoneNumber} </p>
                 {/* <h3 className='font-bold  '>  <EmailOutlinedIcon className="-mt-1 " />    Email:</h3>
                 <p className=" mx-1"  >{customerInfoDetail?.customerEmail}  </p> */}
               </div>
               <div className="flex mt-4  mx-1">
-              <h3 className='font-bold '>   <LocalPhoneOutlinedIcon className="-mt-1 " /> Số điện thoại người thân:</h3>
+                <h3 className='font-bold '>   <LocalPhoneOutlinedIcon className="-mt-1 " /> Số điện thoại người thân:</h3>
                 <p className=" mx-1 "  >  {customerInfoDetail?.relativeTel} </p>
               </div>
               <div className="flex mt-4  mx-1">
@@ -279,118 +279,120 @@ export default function CustomerinfoDetail({ }: Props) {
           </div>
         </div>
       </div>
-      <h2 className="mx-1 mt-4 font-bold text-[#2c2c2c] text-2xl m-4 ">
-              <span className=" border-[1px] rounded-lg lg:w-auto bg-blue-300 mx-2 m-4 py-2 px-2 ">Số lần thuê  : {contractgroup.total} </span>
-            </h2>
-            <div className="mt-5 mb-5">
-          
-        <Paper sx={{ overflow: "hidden" }} className="">
-          <TableContainer sx={{ minHeight: 600, maxHeight: 600 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                    sx={{
-                      backgroundColor: "rgb(219 234 254)",
-                    }}
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                      className="font-bold"
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {loading == true ? (
-                  dataLoad.map((row, index) => {
-                    return (
-                      <TableRow
-                      
-                        key={index}
-                        component="tr"
-                        role="checkbox"
-                        tabIndex={-1}
+      <h2 className="mx-1  font-bold text-[#2c2c2c] text-2xl mt-5 ml-2 ">
+        <span className=" border-[1px] rounded-lg lg:w-auto bg-blue-200 mx-2 m-5 py-2 px-2 ">Số lần thuê  : {contractgroup.total} </span>
+      </h2>
+      <div className=" mb-5">
+        <div className='p-5'>
+          <Paper sx={{ overflow: "hidden" }} className="">
+            <TableContainer sx={{ minHeight: 600, maxHeight: 600 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        sx={{
+                          backgroundColor: "rgb(219 234 254)",
+                        }}
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                        className="font-bold"
                       >
-                        {dataLoadRow.map((column, index) => {
-                          return (
-                            <TableCell key={index} component="td">
-                              <Skeleton
-                                variant="rectangular"
-                                width="100%"
-                                height={20}
-                              />
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })
-                ) : rows.length > 0 ? (
-                  rows.map((row, index) => {
-                    return (
-                      <TableRow
-                        key={index}
-                        component="tr"
-                        role="checkbox"
-                        tabIndex={-1}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell
-                              key={column.id}
-                              align={column.align}
-                              className="py-[6px] px-3"
-                              component="td"
-                            >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })
-                ) : (
-                  <TableRow className="w-full mx-auto text-center text-lg">
-                    <TableCell
-                      colSpan={columns.length}
-                      className="w-full text-center text-lg border-none pt-40"
-                    >
-                      <img
-                        src="https://firebasestorage.googleapis.com/v0/b/carmanaager-upload-file.appspot.com/o/images%2Fdownload.svg2561bc28-0cfc-4d75-b183-00387dc91474?alt=media&token=cc09aed8-ccd7-4d8a-ba3c-0b4ace899f40"
-                        className="h-40 w-40 mx-auto "
-                      />
-                      <h2>Không tìm thấy kết quả nào</h2>
-                      <div className="text-gray-400">
-                        Hãy thử sử dụng các từ khóa chung chung hơn
-                      </div>
-                    </TableCell>
+                        {column.label}
+                      </TableCell>
+                    ))}
                   </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            labelRowsPerPage={"Số lượng của trang"}
-            className=""
-            rowsPerPageOptions={[10, 25, 100]}
-            labelDisplayedRows={({ from, to, count }) =>
-              `${from}-${to} trên ${count}`
-            }
-            component="div"
-            count={contractgroup.total}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
+                </TableHead>
+                <TableBody>
+                  {loading == true ? (
+                    dataLoad.map((row, index) => {
+                      return (
+                        <TableRow
+
+                          key={index}
+                          component="tr"
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {dataLoadRow.map((column, index) => {
+                            return (
+                              <TableCell key={index} component="td">
+                                <Skeleton
+                                  variant="rectangular"
+                                  width="100%"
+                                  height={20}
+                                />
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })
+                  ) : rows.length > 0 ? (
+                    rows.map((row, index) => {
+                      return (
+                        <TableRow
+                          key={index}
+                          component="tr"
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell
+                                key={column.id}
+                                align={column.align}
+                                className="py-[6px] px-3"
+                                component="td"
+                              >
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })
+                  ) : (
+                    <TableRow className="w-full mx-auto text-center text-lg">
+                      <TableCell
+                        colSpan={columns.length}
+                        className="w-full text-center text-lg border-none pt-40"
+                      >
+                        <img
+                          src="https://firebasestorage.googleapis.com/v0/b/carmanaager-upload-file.appspot.com/o/images%2Fdownload.svg2561bc28-0cfc-4d75-b183-00387dc91474?alt=media&token=cc09aed8-ccd7-4d8a-ba3c-0b4ace899f40"
+                          className="h-40 w-40 mx-auto "
+                        />
+                        <h2>Không tìm thấy kết quả nào</h2>
+                        <div className="text-gray-400">
+                          Hãy thử sử dụng các từ khóa chung chung hơn
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              labelRowsPerPage={"Số lượng của trang"}
+              className=""
+              rowsPerPageOptions={[10, 25, 100]}
+              labelDisplayedRows={({ from, to, count }) =>
+                `${from}-${to} trên ${count}`
+              }
+              component="div"
+              count={contractgroup.total}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </div>
+
       </div>
     </div>
   )

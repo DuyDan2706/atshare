@@ -90,11 +90,11 @@ const columns: readonly Column[] = [
     id: "stt",
     label: "Stt",
     minWidth: 50,
-    align: "left",
+    align: "center",
   },
-  { id: "modelName", label: "Tên xe", minWidth: 100,  },
-  { id: "parkingLotName", label: "Bãi xe", minWidth: 100 ,align:"center",},
-  { id: "carColor", label: "Màu xe", minWidth: 150 },
+  { id: "modelName", label: "Tên xe", minWidth: 100, },
+  { id: "parkingLotName", label: "Bãi xe", minWidth: 100, align: "center", },
+  { id: "carColor", label: "Màu xe", minWidth: 100 },
   {
     id: "seatNumber",
     label: "Số chỗ ngồi",
@@ -105,7 +105,7 @@ const columns: readonly Column[] = [
   {
     id: "carFuel",
     label: "Nhiên liệu",
-    minWidth: 100,
+    minWidth: 150,
     align: "left",
   },
   {
@@ -120,8 +120,8 @@ const columns: readonly Column[] = [
     minWidth: 200,
     align: "center",
   },
-  { id: "availability", label: "Khả dụng", minWidth: 100 },
-  { id: "edit", label: "Chi tiết", minWidth: 100 },
+  { id: "availability", label: "Khả dụng", minWidth: 100, align: "center", },
+  { id: "edit", label: "Chi tiết", minWidth: 100, align: "center", },
 ];
 
 
@@ -204,7 +204,7 @@ export default function CarList() {
     seatNumber: 0,
     carColor: "",
     CarModelId: 0,
-    parkingLotId:0,
+    parkingLotId: 0,
   });
   const handleFilter = () => {
     dispatch(
@@ -452,9 +452,9 @@ export default function CarList() {
                     "Mô tả xe": x.carDescription,
                     "Định mức bảo trì": x.periodicMaintenanceLimit,
                     "Mô tả tình trạng xe": x.carStatusDescription,
-                    "Số tiền ETC": x.currentEtcAmount,            
+                    "Số tiền ETC": x.currentEtcAmount,
                     "Số Km bảo trì lần cuối": x.carKmLastMaintenance,
-                    "Hạn cuối đăng kiểm":x.registrationDeadline,
+                    "Hạn cuối đăng kiểm": x.registrationDeadline,
                     "Thể tích xăng": x.tankCapacity,
                   };
                 }) : undefined;
@@ -514,9 +514,9 @@ export default function CarList() {
                     "Mô tả xe": x.carDescription,
                     "Định mức bảo trì": x.periodicMaintenanceLimit,
                     "Mô tả tình trạng xe": x.carStatusDescription,
-                    "Số tiền ETC": x.currentEtcAmount,            
+                    "Số tiền ETC": x.currentEtcAmount,
                     "Số Km bảo trì lần cuối": x.carKmLastMaintenance,
-                    "Hạn cuối đăng kiểm":x.registrationDeadline,
+                    "Hạn cuối đăng kiểm": x.registrationDeadline,
                     "Thể tích xăng": x.tankCapacity,
                   };
                 }) : undefined;
@@ -595,20 +595,20 @@ export default function CarList() {
     const encodedId = btoa(data.id);
     let modelName = (
       <Tooltip title="Chi tiết Xe">
-      <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
-      <button className="flex gap-2  bg-gray-100 px-2 py-1 border-[1px] rounded-2xl">
-        <TimeToLeaveOutlinedIcon className="h-6 w-6" />
-        <p className="">{data.modelName}</p>
-      </button>
-      </Link>
- </Tooltip>
+        <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
+          <button className="flex gap-2  bg-gray-100 px-2 py-1 border-[1px] rounded-2xl">
+            <TimeToLeaveOutlinedIcon className="h-6 w-6" />
+            <p className="">{data.modelName}</p>
+          </button>
+        </Link>
+      </Tooltip>
     );
-  let parkingLotName =  (
-    <button className="mx-2flex gap-2 bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
-      <p className="">{data.parkingLotName}</p>
-    </button>
-  );
-      // let carColor = data.carColor;
+    let parkingLotName = (
+      <button className="mx-2flex gap-2 bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
+        <p className="">{data.parkingLotName}</p>
+      </button>
+    );
+    // let carColor = data.carColor;
     let carColor = (
       <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
         <ColorLensOutlinedIcon className="h-6 w-6" />
@@ -617,14 +617,14 @@ export default function CarList() {
     );
     let seatNumber = (
       <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
-        <FlightClassOutlinedIcon className="h-6 w-6" />
+        <FlightClassOutlinedIcon className="h-6 w-6 -mt-[2px]" />
         <p className="">{data.seatNumber}</p>
       </button>
     );
     //let carFuel = data.carFuel;
     let carFuel = (
       <button className="flex gap-2  bg-gray-100 px-2 py-1 border-[1px] rounded-2xl ">
-        <BatteryChargingFullIcon className="h-6 w-6" />
+        <BatteryChargingFullIcon className="h-6 w-6 -mt-[2px]" />
         <p className="">{data.carFuel}</p>
       </button>
     );
@@ -669,8 +669,8 @@ export default function CarList() {
 
     // let status = data.carStatus;
     let status = (
-      <button onClick={() => handleClickOpenUpdate( data, id)} className={` gap-2  px-4 py-1 border-[1px] rounded-md mx-auto w-[200px] ${statusColor}`}>
-        <p  className="">{data.carStatus}</p>
+      <button onClick={() => handleClickOpenUpdate(data, id)} className={` gap-2  px-4 py-1 border-[1px] rounded-md mx-auto w-[200px] ${statusColor}`}>
+        <p className="">{data.carStatus}</p>
 
       </button>
     );
@@ -697,20 +697,20 @@ export default function CarList() {
     let stt = page * rowsPerPage + (index + 1);
     //let carLicensePlates = data.carLicensePlates.slice(0, 3) + '-' +data.carLicensePlates.slice(3);
     let carLicensePlates = (
-      <button className="flex gap-2   bg-gray-100 px-2 py-1 border-[1px] rounded-xl ">
-        <PaymentOutlinedIcon className="h-6 w-6" />
-        <p className="">
+      <button className="flex gap-2 w-32  text-center  bg-gray-100 px-1  py-1 border-[1px] rounded-xl ">
+        <PaymentOutlinedIcon className="h-6 w-6 -mt-[1px] mx-1" />
+        <p className="text-center">
           {data.carLicensePlates.slice(0, 3) +
             "-" +
             data.carLicensePlates.slice(3)}
         </p>
       </button>
     );
-    
+
     let edit = (
       <Tooltip title="Chi tiết Xe">
-          <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
-        <IconButton>
+        <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
+          <IconButton>
 
             <EditOutlinedIcon className="text-gray-400" />
           </IconButton>
@@ -850,9 +850,14 @@ export default function CarList() {
     }
     setSelected([]);
   };
+  const handleClickChangeEdit = () => {
+    setIsDelete(!isDelete)
+    setSelected([])
+  };
+
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  const dataLoadRow = [{}, {}, {}, {}, {}, {}, {}, {}, {},{}];
+  const dataLoadRow = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   const [showCheckbox, setShowCheckbox] = useState(false);
   const handleShowCheckbox = () => {
     setShowCheckbox(!showCheckbox);
@@ -1014,7 +1019,7 @@ export default function CarList() {
                     ))}
                   </Select>
                 </FormControl>
-             
+
               </div>
             </DialogContent>
             <DialogActions>
@@ -1043,7 +1048,7 @@ export default function CarList() {
             startIcon={
               isDelete == false ? <DeleteOutlinedIcon /> : <EditOutlinedIcon />
             }
-            onClick={() => setIsDelete(!isDelete)}
+            onClick={handleClickChangeEdit}
           >
             {isDelete == false ? "Xóa" : "Chọn"}
           </Button>
@@ -1081,7 +1086,6 @@ export default function CarList() {
           <Paper sx={{ overflow: "hidden" }} className="">
 
             <TableContainer sx={{ minHeight: 700, maxHeight: 700 }}>
-
               <EnhancedTableToolbar numSelected={selected.length}
                 onClickDelete={() => handleClickOpenDelete1(selected)}
               />
@@ -1094,8 +1098,8 @@ export default function CarList() {
                       backgroundColor: "rgb(219 234 254)",
                     }}
                   >
-                    <TableCell padding="checkbox">
-                      {isDelete && selected && (
+                    {isDelete && selected && (
+                      <TableCell padding="checkbox">
                         <Checkbox
                           indeterminate={
                             selected.length > 0 &&
@@ -1110,8 +1114,8 @@ export default function CarList() {
                             "aria-label": "Select all rows",
                           }}
                         />
-                      )}
-                    </TableCell>
+                      </TableCell>
+                    )}
                     {columns.map((column) => (
                       <TableCell
                         key={column.id}
@@ -1133,8 +1137,7 @@ export default function CarList() {
                           tabIndex={-1}
                           key={index}
                         >
-                          <TableCell padding="checkbox">
-                          </TableCell>
+
                           {dataLoadRow.map((column, index) => {
                             return (
                               <TableCell key={index}>
@@ -1159,8 +1162,9 @@ export default function CarList() {
                           key={index}
                           selected={isItemSelected}
                         >
-                          <TableCell padding="checkbox">
-                            {isDelete && selected && (
+                          {isDelete && selected && (
+                            <TableCell padding="checkbox">
+
                               <Checkbox
                                 checked={isItemSelected}
                                 onChange={(event) =>
@@ -1170,8 +1174,8 @@ export default function CarList() {
                                   "aria-labelledby": `checkbox-${row.id}`,
                                 }}
                               />
-                            )}
-                          </TableCell>
+                            </TableCell>
+                          )}
                           {columns.map((column) => {
                             const value = row[column.id];
                             return (
@@ -1243,15 +1247,15 @@ export default function CarList() {
 
               return (
                 <div
-                
+
                   key={item.id}
 
                   className={"p-2 shadow-sm  shadow-gray-400  rounded-lg  "}
                 >
                   <div className="w-full relative inline-block">
-                    
+
                     <Link
-                    
+
                       to={`/Admin/CarManagement/CarDetail/${encodedId}`}
                       className="flex hover:text-blue-400 cursor-pointer"
                     >
@@ -1410,10 +1414,10 @@ export default function CarList() {
 
       <Modal openDad={open} parentCallback={callbackFunctionPopup} />
       <ModalStatus
-      openDad={open2}
-      id ={id}
-      parentCallback={callbackFunctionPopup1}
-      userDad={userDad}
+        openDad={open2}
+        id={id}
+        parentCallback={callbackFunctionPopup1}
+        userDad={userDad}
       />
       {CarResult.cars.length > 0 && isconvert == true ? (
         <Pagination

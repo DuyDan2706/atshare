@@ -84,11 +84,11 @@ export default function CarMaintenanceInfo({ }: Props) {
 
   });
 
-  const { carmaitance,loading } = useSelector((state: RootState) => state.CarResult); //r
+  const { carmaitance, loading } = useSelector((state: RootState) => state.CarResult); //r
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(11);
   const [isconvert, setIsconvert] = useState(false);
-  
+
   const handleClickChangeConvert = () => {
     setIsconvert(!isconvert);
     if (!isconvert === false) {
@@ -146,7 +146,7 @@ export default function CarMaintenanceInfo({ }: Props) {
       dispatch(actionAsync);
     };
   }
-  
+
 
   let firstCharacter: string = "";
   useEffect(() => {
@@ -169,55 +169,55 @@ export default function CarMaintenanceInfo({ }: Props) {
   });
   function createData(data: any, index: number, page: number) {
     const encodedId = btoa(data.id);
-    let modelName = (  
+    let modelName = (
       <Tooltip title="Chi tiết Xe">
-      <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
-    <button className="flex gap-2  hover:bg-gray-200 bg-gray-100 px-2 py-1 border-[1px] rounded-2xl hover:text-gray-600">
-    <TimeToLeaveOutlinedIcon className="h-6 w-6" />
-    <p className="">{data.modelName}</p>
-   </button>
-   </Link>
-</Tooltip>
-   )
-    let kmTraveled =formatToKM(data.kmTraveled);
-    let color1 =data.kmTraveled >= 10000? "text-red-500" : "text-green-400";
-    let periodicMaintenanceLimit =formatToKM(data.periodicMaintenanceLimit);
-    let carLicensePlates =( <button className="flex gap-2    bg-gray-100 px-2 py-1 border-[1px] rounded-xl ">
-    <PaymentOutlinedIcon className="h-6 w-6" />
-   <p className="">{data.carLicensePlates.slice(0, 3) + '-' +data.carLicensePlates.slice(3)}</p>
-  </button>)
+        <Link to={`/Admin/CarManagement/CarDetail/${encodedId}`}>
+          <button className="flex gap-2  hover:bg-gray-200 bg-gray-100 px-2 py-1 border-[1px] rounded-2xl hover:text-gray-600">
+            <TimeToLeaveOutlinedIcon className="h-6 w-6" />
+            <p className="">{data.modelName}</p>
+          </button>
+        </Link>
+      </Tooltip>
+    )
+    let kmTraveled = formatToKM(data.kmTraveled);
+    let color1 = data.kmTraveled >= 10000 ? "text-red-500" : "text-green-400";
+    let periodicMaintenanceLimit = formatToKM(data.periodicMaintenanceLimit);
+    let carLicensePlates = (<button className="flex gap-2    bg-gray-100 px-2 py-1 border-[1px] rounded-xl ">
+      <PaymentOutlinedIcon className="h-6 w-6" />
+      <p className="">{data.carLicensePlates.slice(0, 3) + '-' + data.carLicensePlates.slice(3)}</p>
+    </button>)
     let id = data.id;
     let status = data.carStatus
     let stt = page * rowsPerPage + (index + 1);
     //let color =data.periodicMaintenanceLimit >= 10000000 ? "text-red-500" : "text-yellow-500";
     let edit = (
-      <Link  to={{ pathname:`/Admin/CarMaintenanceInfo/CarMaintenanceInfoDetail/${encodedId}`}}>
-      <Tooltip title="Chi tiết Xe" >
-        <IconButton>
-          <EditOutlinedIcon className="text-gray-400" />
-        </IconButton>
-      </Tooltip>
+      <Link to={{ pathname: `/Admin/CarMaintenanceInfo/CarMaintenanceInfoDetail/${encodedId}` }}>
+        <Tooltip title="Chi tiết Xe" >
+          <IconButton>
+            <EditOutlinedIcon className="text-gray-400" />
+          </IconButton>
+        </Tooltip>
       </Link>
     );
 
 
-    return { modelName, status, stt, edit, carLicensePlates, id,kmTraveled:(<span className={color1}>{kmTraveled}</span>),periodicMaintenanceLimit,};
+    return { modelName, status, stt, edit, carLicensePlates, id, kmTraveled: (<span className={color1}>{kmTraveled}</span>), periodicMaintenanceLimit, };
   }
 
 
   const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  const dataLoadRow = [{}, {}, {}, {}, {},{}];
+  const dataLoadRow = [{}, {}, {}, {}, {}, {}];
   return (
     <div className="mt-8 mx-5 " >
 
-    <div className="  xl:flex mb-5 w-full">
-      <div className="ml-auto flex justify-between flex-wrap  gap-5 "> 
+      <div className="  xl:flex mb-5 w-full">
+        <div className="ml-auto flex justify-between flex-wrap  gap-5 ">
+        </div>
       </div>
-    </div>
-      <div className="mt-5">
-      <Paper sx={{ overflow: "hidden" }} className="">
+      <div className="">
+        <Paper sx={{ overflow: "hidden" }} className="">
           <TableContainer sx={{ minHeight: 740, maxHeight: 700 }}>
-          <Table aria-label="sticky table">
+            <Table aria-label="sticky table">
               <TableHead>
                 <TableRow
                   sx={{
@@ -296,7 +296,7 @@ export default function CarMaintenanceInfo({ }: Props) {
                       />
                       <h2>Chưa có xe nào nào tới hạn bảo dưỡng trong thời gian này</h2>
                       <div className="text-gray-400">
-                        Hãy quay lại sau khi có xe tới hạn bảo dưỡng 
+                        Hãy quay lại sau khi có xe tới hạn bảo dưỡng
                       </div>
                     </TableCell>
                   </TableRow>
@@ -320,12 +320,12 @@ export default function CarMaintenanceInfo({ }: Props) {
           />
         </Paper>
       </div>
-    
 
 
-   
-  
-  </div>
+
+
+
+    </div>
 
 
   )

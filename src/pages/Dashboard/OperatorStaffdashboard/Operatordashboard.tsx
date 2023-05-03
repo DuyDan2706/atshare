@@ -160,10 +160,10 @@ export default function Operatordashboard({}: Props) {
         <div className=" mb-2 gap-2 mt-2 flex font-sans font-bold uppercase ml-2 text-lg border-l-4 border-blue-400 pl-2">
           Danh sách quản lý
         </div>
-        <div className="grid  grid-cols-1 md:grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-10 mt-4">
+        <div className="grid grid-cols-3 gap-10 mt-4">
           <Card className="flex  ">
             <div className="">
-              <Link to="/Scheduling">
+              <Link to="/Admin/ContractGroup">
                 <button className="text-white bg-gray-100 rounded-lg  ml-5 my-[10px] h-20 w-20">
                   <ShoppingBagOutlinedIcon className="text-teal-400 h-12 w-12" />
                 </button>
@@ -180,7 +180,7 @@ export default function Operatordashboard({}: Props) {
               </div>
             </div>
           </Card>
-          <Card className="flex   ">
+          {/* <Card className="flex   ">
             <div className="">
               <Link to="/Scheduling">
                 <button className="text-white bg-yellow-100 rounded-lg  ml-5 my-[10px] h-20 w-20">
@@ -201,11 +201,11 @@ export default function Operatordashboard({}: Props) {
                 <div className="text-sm mt-[1px]">Đã thuê xe</div>
               </div>
             </div>
-          </Card>
+          </Card> */}
 
           <Card className="flex  ">
             <div className="">
-              <Link to="/Scheduling">
+              <Link to="/Operator/CarActiveManagement">
                 <button className="text-white bg-green-100 rounded-lg  ml-5 my-[10px] h-20 w-20">
                   <PersonOutlineOutlinedIcon className="text-green-700 h-12 w-12" />
                 </button>
@@ -251,27 +251,33 @@ export default function Operatordashboard({}: Props) {
             </div>
             <div className="grid gap-10 grid-cols-1 lg:grid-cols-2 mx-10 my-5">
               <Card className=" bg-blue-50 flex gap-5">
+              <Link to="/Operator/CarActiveManagement">
                 <button className="text-white bg-blue-500 rounded-lg  ml-5 my-[10px] h-20 w-20">
                   <TimeToLeaveOutlinedIcon className="text-white h-12 w-12" />
                 </button>
+                </Link>
                 <div className="mt-5 ">
                   <p className="text-gray-400 font-light"> xe đang hoạt động</p>
                   <p className="text-blue-500 text-lg mt-2 font-bold">{CarActiveResult.total}</p>
                 </div>
               </Card>
               <Card className=" bg-yellow-50 flex gap-5">
+              <Link to="/Operator/CarMaintenanceInfo">
                 <button className="text-white bg-yellow-400 rounded-lg  ml-5 my-[10px] h-20 w-20">
                   <EngineeringOutlinedIcon className="text-white h-12 w-12" />
                 </button>
+                </Link>
                 <div className="mt-5 ">
                   <p className="text-gray-400">Xe tới hạn bảo dưỡng</p>
                   <p className="text-yellow-400 text-lg mt-2 font-bold">  {carmaitance.total}</p>
                 </div>
               </Card>
               <Card className=" bg-indigo-100 flex gap-5">
+              <Link to="/Operator/CarNeedRegistry">
                 <button className="text-white bg-indigo-400 rounded-lg  ml-5 my-[10px] h-20 w-20">
                   <NoCrashOutlinedIcon className="text-white h-12 w-12" />
                 </button>
+                </Link>
                 <div className="mt-5 ">
                   <p className="text-gray-400">Xe tới hạn đăng kiểm</p>
                   <p className="text-indigo-400 text-lg mt-2 font-bold">{CarNeedRegistry.total}</p>
