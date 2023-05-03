@@ -91,7 +91,7 @@ export const PopupFail = (props: any) => {
       }));
 
   const body = {
-    ToEmail: "phuchlhse140849@fpt.edu.vn",
+    ToEmail: `${data.staffEmail}`,
     Subject: `[ATSHARE] Thông báo yêu cầu thuê xe đơn ${data.id}`,
     Body: `<!DOCTYPE html>
     <html lang="en">
@@ -124,7 +124,7 @@ export const PopupFail = (props: any) => {
         color: #404F5E;
         font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
            font-size: 20px;
-           margin: 0;">Đơn hàng:${data.id}</p>
+           margin: 0;">Yêu cầu thuê:${data.id}</p>
            <p style=" padding-top: 5px;
            color: #404F5E;
            font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
@@ -135,7 +135,7 @@ export const PopupFail = (props: any) => {
                  color: ##DCDCDC;
                  font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
                     font-size: 20px;
-                    margin: 0;">Lưu ý: Vui lòng cập nhật lại thông tin(<a href="https://atshare.vercel.app/">tại đây</a>)</p>  
+                    margin: 0;">Lưu ý: Vui lòng cập nhật lại thông tin(<a href="https://atshare.vercel.app/profiledetail/${data.id}">tại đây</a>)</p>  
 </body></html>`,
 
   };

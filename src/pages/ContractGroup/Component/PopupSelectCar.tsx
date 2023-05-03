@@ -79,7 +79,7 @@ export const PopupSelectCar = (props: any) => {
   const [carMakeID, setCarMakeID] = useState(
     data.requireDescriptionInfoCarBrand
   );
-  
+
   const [color, setColor] = useState(data.requireDescriptionInfoCarColor);
   const [gearBox, setGearBox] = useState(data.requireDescriptionInfoGearBox);
   const [DateStart, setDateStart] = useState(data.rentFrom);
@@ -145,7 +145,7 @@ export const PopupSelectCar = (props: any) => {
           open={openDad}
         >
           <form>
-          <PopupImage src={imgSrc} CloseImg={CloseImg} openImg={openImg} />
+            <PopupImage src={imgSrc} CloseImg={CloseImg} openImg={openImg} />
             <BootstrapDialogTitle
               id="customized-dialog-title"
               onClose={handleClose}

@@ -82,8 +82,8 @@ export default function Profile() {
     pagination: pagination,
     status: statusContractGr === 0 ? "" : statusContractGr,
     id: userProfile.id != null ? userProfile.id : null,
-    CitizenIdentificationInfoNumber:null
-    
+    CitizenIdentificationInfoNumber: null
+
   };
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -116,7 +116,7 @@ export default function Profile() {
     if (
       file &&
       file.type !==
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     ) {
       setAlert("error");
       setMessageAlert("Chỉ nhận file Excel thôi");
@@ -193,18 +193,18 @@ export default function Profile() {
     let status = (
       <p
         className={
-          data.contractGroupStatusId == 1 
+          data.contractGroupStatusId == 1 || data.contractGroupStatusId == 5 || data.contractGroupStatusId == 6
             ? "bg-yellow-300 font-semibold text-center text-yellow-700 px-2 py-1 rounded-md mx-auto w-[220px]"
-            :data.contractGroupStatusId >= 4
-            ? "bg-blue-300 font-semibold text-center text-blue-700 px-2 py-1 rounded-md mx-auto w-[220px]"
-            : "bg-red-300 font-semibold text-center text-red-700 px-2 py-1 rounded-md mx-auto w-[220px]"
+            : data.contractGroupStatusId >= 4
+              ? "bg-blue-300 font-semibold text-center text-blue-700 px-2 py-1 rounded-md mx-auto w-[220px]"
+              : "bg-red-300 font-semibold text-center text-red-700 px-2 py-1 rounded-md mx-auto w-[220px]"
         }
       >
         {data.contractGroupStatusId == 1
           ? "Đang thẩm định"
-          : data.contractGroupStatusId >= 4
-          ? "Yêu cầu hoàn tất"
-          : data.contractGroupStatusName}
+          : data.contractGroupStatusId >= 7
+            ? "Yêu cầu hoàn tất"
+            : data.contractGroupStatusName}
       </p>
     );
     let stt = page * 11 + (index + 1);
@@ -239,10 +239,10 @@ export default function Profile() {
                   <MenuItem value={0}>Tất cả</MenuItem>
                   {contractgroupstatus.length > 0
                     ? contractgroupstatus.map((model: any) => (
-                        <MenuItem key={model.id} value={model.id}>
-                          {model.name}
-                        </MenuItem>
-                      ))
+                      <MenuItem key={model.id} value={model.id}>
+                        {model.name}
+                      </MenuItem>
+                    ))
                     : null}
                 </Select>
               </FormControl>
@@ -284,55 +284,55 @@ export default function Profile() {
                 <TableBody component={"div"}>
                   {loading == true
                     ? dataLoad.map((row, index) => {
-                        return (
-                          <TableRow
-                            component="div"
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={index}
-                          >
-                            {dataLoadRow.map((column, index) => {
-                              return (
-                                <TableCell component="div" key={index}>
-                                  <Skeleton
-                                    variant="rectangular"
-                                    width="100%"
-                                    height={20}
-                                  />
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })
+                      return (
+                        <TableRow
+                          component="div"
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={index}
+                        >
+                          {dataLoadRow.map((column, index) => {
+                            return (
+                              <TableCell component="div" key={index}>
+                                <Skeleton
+                                  variant="rectangular"
+                                  width="100%"
+                                  height={20}
+                                />
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })
                     : rows.map((row, index) => {
-                        return (
-                          <TableRow
-                            component={Link}
-                            to={`/profiledetail/${row.id}`}
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={index}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell
-                                  component={"div"}
-                                  key={column.id}
-                                  align={column.align}
-                                  className="py-1 px-3"
-                                >
-                                  {column.format && typeof value === "number"
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })}
+                      return (
+                        <TableRow
+                          component={Link}
+                          to={`/profiledetail/${row.id}`}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={index}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell
+                                component={"div"}
+                                key={column.id}
+                                align={column.align}
+                                className="py-1 px-3"
+                              >
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
                 </TableBody>
               </Table>
             </TableContainer>

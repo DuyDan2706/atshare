@@ -306,7 +306,7 @@ export default function AppraisalRecord(props: any) {
         contractGroupId: contractgroupDetails.id,
       });
       const body = {
-        ToEmail: "phuchlhse140849@fpt.edu.vn",
+        ToEmail: `${contractgroupDetails.staffEmail}`,
         Subject: `[ATSHARE] Thông báo yêu cầu thuê xe đơn ${contractgroupDetails.id}`,
         Body: `<!DOCTYPE html>
         <html lang="en">
@@ -339,14 +339,14 @@ export default function AppraisalRecord(props: any) {
             color: #404F5E;
             font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
                font-size: 20px;
-               margin: 0;">Đơn hàng:${contractgroupDetails.id}</p>
+               margin: 0;">Yêu cầu:${contractgroupDetails.id}</p>
                
               
                      <p style=" padding-top: 5px;
                      color: ##DCDCDC;
                      font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
                         font-size: 20px;
-                        margin: 0;">Lưu ý: Xem lại thông tin(<a href="https://atshare.vercel.app/">tại đây</a>)</p>  
+                        margin: 0;">Lưu ý: Xem lại thông tin(<a href="https://atshare.vercel.app/profiledetail/${contractgroupDetails.id}">tại đây</a>)</p>  
     </body></html>`,
 
       };
@@ -1002,7 +1002,7 @@ export default function AppraisalRecord(props: any) {
                       `${from}-${to} trên ${count}`
                     }
                     component="div"
-                    count={contractGroupByCustomer.length}
+                    count={filterContract.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

@@ -108,7 +108,7 @@ const settings = {
 };
 function BootstrapDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
-
+  const dispatch: DispatchType = useDispatch();
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -142,9 +142,13 @@ export const PopupPdf = (props: any) => {
     signCustomer,
     pdfFileWithSignsPath,
     dataContract,
-    rentContractFiles
+    rentContractFiles,
+    role
   } = props;
-
+  const dispatch: DispatchType = useDispatch();
+  const { user } = useAppSelector((state: RootState) => state.user);
+  
+  console.log("ngudandan2", data, dataContract, user && user.email)
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
   }, []);
@@ -154,9 +158,11 @@ export const PopupPdf = (props: any) => {
     id: number;
     file: File | null;
   }
+  const userEmail = user != null ? user.email : "";
+
   const body = {
-    ToEmail: "phuchlhse140849@fpt.edu.vn",
-    Subject: `[ATSHARE] Thông báo hợp đồng thuê xe ${data && data.id}`,
+    ToEmail: `${dataContract && dataContract.staffEmail}`,
+    Subject: `[ATSHARE] Thông báo hợp đồng thuê xe ${data && data.contractGroupId}`,
     Body: `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -188,12 +194,12 @@ export const PopupPdf = (props: any) => {
         color: #404F5E;
         font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
            font-size: 20px;
-           margin: 0;">Đơn hàng:${data && data.id}</p>
+           margin: 0;">Yêu cầu:${data && data.contractGroupId}</p>
            <p style=" padding-top: 5px;
            color: #404F5E;
            font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
               font-size: 20px;
-              margin: 0;">Thông báo: đã lên hợp đồng thành công, đã gửi link pdf quá</p>  
+              margin: 0;">Thông báo: đã lên hợp đồng thành công, đã gửi link PDF</p>  
           
                  <p style=" padding-top: 5px;
                  color: ##DCDCDC;
@@ -204,8 +210,8 @@ export const PopupPdf = (props: any) => {
 
   };
   const body1 = {
-    ToEmail: "phuchlhse140849@fpt.edu.vn",
-    Subject: `[ATSHARE] Thông báo hợp đồng thuê xe ${data && data.id}`,
+    ToEmail: `${userEmail}`,
+    Subject: `[ATSHARE] Thông báo hợp đồng thuê xe ${data && data.contractGroupId}`,
     Body: `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -237,12 +243,12 @@ export const PopupPdf = (props: any) => {
         color: #404F5E;
         font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
            font-size: 20px;
-           margin: 0;">Đơn hàng:${data && data.id}</p>
+           margin: 0;">Yêu cầu:${data && data.contractGroupId}</p>
            <p style=" padding-top: 5px;
            color: #404F5E;
            font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
               font-size: 20px;
-              margin: 0;">Thông báo: đã lên cập nhật ảnh hợp đồng có chữ ký khách hàng lên hệ thông</p>  
+              margin: 0;">Thông báo: đã cập nhật ảnh hợp đồng có chữ ký khách hàng lên hệ thông</p>  
           
                  <p style=" padding-top: 5px;
                  color: ##DCDCDC;
@@ -252,6 +258,7 @@ export const PopupPdf = (props: any) => {
 </body></html>`,
 
   };
+
   const [contractFiles, setContractFiles] = useState<DataListFileFireBase[]>([]);
   const handleClickOpenDelete = (id: number) => {
     const newArrayListFile = [...contractFiles];
@@ -295,7 +302,6 @@ export const PopupPdf = (props: any) => {
   };
 
 
-  const dispatch: DispatchType = useDispatch();
   const refNe = useRef<HTMLDivElement>(null);
   const signCanvasCustomer = useRef() as React.MutableRefObject<any>;
   const signCanvasExpertise = useRef() as React.MutableRefObject<any>;
@@ -389,7 +395,7 @@ export const PopupPdf = (props: any) => {
         )
       );
 
-     
+
       dispatch(
         postRentContractFilesReducerAsyncApi(urls)
       ).then((response) => {
@@ -413,7 +419,7 @@ export const PopupPdf = (props: any) => {
 
     }
   };
-  
+
   async function handleUpdatePdfReceiveContract() {
     try {
       setPopupLoading(true);
@@ -540,7 +546,7 @@ export const PopupPdf = (props: any) => {
 
   let signView: any;
   if (pdfName == "RentContract") {
-    if (signStaff == null) {
+    if (signStaff == null && role != "sale") {
       signView = (
         <div>
           <div className="font-bold text-xl mb-2">chữ ký người thẩm định</div>
@@ -574,7 +580,7 @@ export const PopupPdf = (props: any) => {
               <Button
                 variant="contained"
                 component="label"
-                className={dataContract.contractGroupStatusId >= 7 ? "hidden" : "bg-white text-[#1976d2] shadow-none rounded-md "}
+                className={dataContract.contractGroupStatusId <= 6 && role == "sale" ? "bg-white text-[#1976d2] shadow-none rounded-md " : "hidden"}
               >
                 <AddPhotoAlternateIcon /> Thêm ảnh
                 <input

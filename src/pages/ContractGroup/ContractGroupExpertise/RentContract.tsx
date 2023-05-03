@@ -128,7 +128,7 @@ export default function RentContract(props: any) {
       carGeneralInfoAtRentPriceForMonth: CarResultDetail.priceForMonth,
       createdDate: new Date(),
       paymentAmount: newPrice,
-      deliveryFee: deliveryFee,
+      deliveryFee: deliveryFee == null ? 0 : deliveryFee  ,
       // depositItemDescription: description,
     });
     dispatch(actionPostRentContract).then((response: any) => {
@@ -958,7 +958,7 @@ export default function RentContract(props: any) {
               <input
                 onChange={handleChangeDeliveryFee}
                 disabled={contractgroupDetails.contractGroupStatusId != 6 ? false : true}
-                value={parseToVND(deliveryFee)}
+                value={deliveryFee == null ? 0 + " đ" : parseToVND(deliveryFee) + " đ"}
                 className={contractgroupDetails.contractGroupStatusId == 6 ? "border-[1px] rounded-[4px] h-10 pl-2  border-gray-400 w-full outline-blue-400 bg-gray-100"
                   : " border-[1px] rounded-[4px] h-10 pl-2 w-full outline-blue-400 "}
               />

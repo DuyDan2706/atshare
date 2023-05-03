@@ -51,9 +51,10 @@ import PopupComfirm from "../../Components/PopupComfirm";
 import PopupImage from "../../Components/PopupImage";
 import PopupLoading from "../../Components/PopupLoading";
 import { deleteCustomerInfoBycustomerFileId } from "../../redux/CustomerinfoReducer/CustomerinfoReducer";
-import ProfileTemplate from "./ProfileTemplate";
-import { getRentContractByContractIdAsyncApi, getRentContractFilesByContractIdAsyncApi } from "../../redux/RentContractReducer/RentContractReducer";
+import { getRentContractByContractIdAsyncApi, getRentContractFilesByContractIdAsyncApi, postSendMailReducerAsyncApi } from "../../redux/RentContractReducer/RentContractReducer";
+import { getProfileAsyncApi } from "../../redux/UserReducer/userReducer";
 import { PopupPdf } from "../ContractGroup/Component/PopupPdf";
+import ProfileTemplate from "./ProfileTemplate";
 function parseToInputDate(dateString: any) {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -108,8 +109,8 @@ export default function ProfileDetail(props: any) {
   const { parentCallback } = props;
   const [openImg, setOpenImg] = useState(false);
   const [imgSrc, setImgSrc] = useState();
-  const userString = localStorage.getItem("user");
-  const user = JSON.parse(userString == null ? "" : userString);
+  // const userString = localStorage.getItem("user");
+  // const user = JSON.parse(userString == null ? "" : userString);
   const [alert, setAlert] = useState("");
   const [isConfirm, setIscConfirm] = useState(false);
   const [messageAlert, setMessageAlert] = useState("");
@@ -125,12 +126,14 @@ export default function ProfileDetail(props: any) {
   const { contractgroupDetails } = useAppSelector(
     (state: RootState) => state.ContractGroup
   );
+  const { user } = useAppSelector((state: RootState) => state.user);
   const { rentContractDetailByContractId } = useAppSelector(
     (state: RootState) => state.rentContract
   );
   const { rentContractFiles } = useAppSelector(
     (state: RootState) => state.rentContract
   );
+
   function ApiGetRentContractFilter(values: any) {
     const actionGetRentContractFilter =
       getRentContractFilesByContractIdAsyncApi(values);
@@ -187,6 +190,77 @@ export default function ProfileDetail(props: any) {
       reader.readAsDataURL(file1);
     }
   };
+  let expertiseView;
+  if (contractgroupDetails.contractGroupStatusId !== 1) {
+    expertiseView = (
+      <>
+        <div className="grid grid-cols-3">
+          <div>
+            <h2 className="text-xl font-bold mb-2">Nhân viên Điều hành</h2>
+            <p className="text-gray-400">
+              Nhân viên của bãi xe đi giao xe
+            </p>
+          </div>
+          {user?.id != 0 ? (
+            <div className="col-span-2 ml-4">
+              <div className="mb-5">
+                <p className="font-semibold mb-2">Họ và tên</p>
+                <input
+                  value={user?.name}
+                  disabled
+                  className=" border-[1px] rounded-[4px] h-10 pl-2  border-gray-400 w-full  outline-blue-400"
+                />
+              </div>
+              <div className="mb-5">
+                <p className="font-semibold mb-2">Số điện thoại</p>
+                <input
+                  value={user?.phoneNumber}
+                  disabled
+                  className=" border-[1px] rounded-[4px] h-10 pl-2  border-gray-400 w-full  outline-blue-400"
+                />
+              </div>
+              <div className="mb-5">
+                <p className="font-semibold mb-2">Email</p>
+                <input
+                  value={user?.email}
+                  disabled
+                  className=" border-[1px] rounded-[4px] h-10 pl-2  border-gray-400 w-full  outline-blue-400"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="col-span-2 ml-4">
+              <div className="mb-5">
+                <p className="font-semibold mb-2">Họ và tên</p>
+                <Skeleton
+                  variant="rectangular"
+                  className="w-full"
+                  height={40}
+                />
+              </div>
+              <div className="mb-5">
+                <p className="font-semibold mb-2">Số điện thoại</p>
+                <Skeleton
+                  variant="rectangular"
+                  className="w-full"
+                  height={40}
+                />
+              </div>
+              <div className="mb-5">
+                <p className="font-semibold mb-2">Email</p>
+                <Skeleton
+                  variant="rectangular"
+                  className="w-full"
+                  height={40}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <hr className="mt-2" />
+      </>
+    );
+  }
   const handleFileOtherInputChange = (
     newValue: number,
     status: boolean,
@@ -231,6 +305,50 @@ export default function ProfileDetail(props: any) {
       };
       reader.readAsDataURL(file1);
     }
+  };
+  const body = {
+    ToEmail: `${user?.email}`,
+    Subject: `[ATSHARE] Thông báo yêu cầu thuê xe đơn ${contractgroupDetails.id}`,
+    Body: `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body style=" text-align: center; padding: 40px 0; background: #EBF0F5;  width: 100%; height: 100%;">
+    <div style="
+        background: white;
+        padding-left: 300px;
+    padding-right: 300px;
+    padding-top: 50;
+    padding-bottom: 50px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+    " class="card">
+        <h1 style=" color: #008CBA;font-size: 40px;"> ATSHARE</h1>
+        <hr />
+        <img style="" src="https://firebasestorage.googleapis.com/v0/b/carmanaager-upload-file.appspot.com/o/images%2Flogo-color%20(1).pngeddab547-393c-4a52-8228-389b00aeacad?alt=media&token=a9fe5d57-b871-46a0-a9da-508902f09832&fbclid=IwAR0naf-IAgqC0ireg_vTPIvu9q0dK_n0gqKdNHhWFhvOyvhjWph-boPTWYk" />
+        <h1 style=" color: #59c91c; font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
+            font-weight: 900;
+            font-size: 40px;
+            margin-bottom: 10px;">
+            Yêu cầu cập nhật
+        </h1>
+        <p style=" padding-top: 5px;
+        color: #404F5E;
+        font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
+           font-size: 20px;
+           margin: 0;">Yêu cầu:${contractgroupDetails.id}</p>
+          
+                 <p style=" padding-top: 5px;
+                 color: ##DCDCDC;
+                 font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
+                    font-size: 20px;
+                    margin: 0;">Lưu ý: Xem lại thông tin(<a href="https://atshare.vercel.app/Expertise/ContractGroup/ContractGroupDetail/${contractgroupDetails.id}">tại đây</a>)</p>  
+</body></html>`,
+
   };
   const initialValues = {
     id: 0,
@@ -431,7 +549,12 @@ export default function ProfileDetail(props: any) {
           putCarContractgroupReducercarAsyncApi(updatedValues);
         dispatch(actionPutContractGroup).then((response: any) => {
           if (response.payload != undefined) {
-
+            if (
+              contractgroupDetails.contractGroupStatusId == 2 ||
+              contractgroupDetails.contractGroupStatusId == 3
+            ) {
+              dispatch(postSendMailReducerAsyncApi(body));
+            }
             for (let data of dataListFile) {
 
               if (data.isDelete == true && data.status == true) {
@@ -556,10 +679,13 @@ export default function ProfileDetail(props: any) {
       frmContractGroupDetail.setValues(contractgroupDetails);
     }
     if (
-      contractgroupDetails.contractGroupStatusId == 2 ||
-      contractgroupDetails.contractGroupStatusId == 3
+      contractgroupDetails.contractGroupStatusId >= 2
     ) {
-      dispatch(getByIdAppraisalRecordReducerAsyncApi(contractgroupDetails?.id));
+      dispatch(getByIdAppraisalRecordReducerAsyncApi(contractgroupDetails?.id)).then((response: any) => {
+        if (response.payload != undefined) {
+          dispatch(getProfileAsyncApi(response.payload.expertiserId));
+        }
+      });
     }
     setDataListFile(
       contractgroupDetails.customerFiles.map((item) => ({
@@ -892,6 +1018,8 @@ export default function ProfileDetail(props: any) {
               </div>
             </div>
             <hr className="mt-2 " />
+            {expertiseView}
+
             <div className="grid grid-cols-3 mt-5">
               <div>
                 <h2 className="text-xl font-bold mb-2">Hồ sơ cá nhân</h2>
@@ -1703,7 +1831,7 @@ export default function ProfileDetail(props: any) {
                   startIcon={<AddIcon />}
                   onClick={handleClickAddItemInDataListFile}
                   color="success"
-                  className={contractgroupDetails.contractGroupStatusId > 1 ? "hidden" : "btn-choose-car" }
+                  className={contractgroupDetails.contractGroupStatusId > 1 ? "hidden" : "btn-choose-car"}
                   variant="contained"
                 >
                   thêm mới
@@ -1774,6 +1902,7 @@ export default function ProfileDetail(props: any) {
         pdfName={"RentContract"}
         dataContract={contractgroupDetails}
         rentContractFiles={rentContractFiles}
+        role="sale"
       />
     </ProfileTemplate>
   );
