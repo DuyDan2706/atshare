@@ -54,7 +54,7 @@ export const QRcodeModal = (props: any) => {
   const handleClose = () => {
     parentCallback(false);
   };
-console.log("logne", userDad)
+
   const renderuUpdateModalUI = () => {
     return (
       <>

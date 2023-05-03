@@ -111,7 +111,7 @@ export const PopupSelectCar = (props: any) => {
       })
     );
   }, [seatNumber, color, carMakeID]);
-  console.log("123456", data)
+
   const { CarActiveResult } = useAppSelector((state: RootState) => state.CarResult);
   const [openImg, setOpenImg] = useState(false);
   const [imgSrc, setImgSrc] = useState();

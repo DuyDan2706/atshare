@@ -129,7 +129,7 @@ export const ModalpostcarExpense = (props: any) => {
  };
 
 
-  console.log("test",formik.values)
+
   const renderuUpdateModalUI = () => {
 
 

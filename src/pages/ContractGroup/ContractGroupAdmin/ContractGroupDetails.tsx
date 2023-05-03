@@ -291,7 +291,7 @@ export default function ContractGroupDetail(props: any) {
   const rows = filterListDelte.map((data: any, index: number) => {
     return createData(data, index);
   });
-  console.log("12345", dataListFile);
+ 
   const frmContractGroupDetail = useFormik<contractgroupDetailsModel>({
     initialValues: {
       id: 0,
@@ -795,7 +795,7 @@ export default function ContractGroupDetail(props: any) {
                   </TableHead>
                   <TableBody>
                     {rows.map((row, index) => {
-                      console.log("12345", row);
+                 
                       return (
                         <TableRow
                           sx={

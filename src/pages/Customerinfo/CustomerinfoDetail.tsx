@@ -74,8 +74,7 @@ export default function CustomerinfoDetail({ }: Props) {
   const { contractgroup, loading } = useAppSelector(
     (state: RootState) => state.ContractGroup
   );
-  console.log("dan", contractgroup)
-  console.log("dan1", customerInfoDetail?.citizenIdentificationInfoNumber)
+
 
   const rows = contractgroup.contracts.map((data: any, index: number) => {
     return createData(data, index, page);
@@ -106,7 +105,7 @@ export default function CustomerinfoDetail({ }: Props) {
 
   const getContractAPi = () => {
     if (param.id) {
-      console.log("tests ", param.id)
+    
       const CitizenIdentificationInfoNumber: string = param.id;
       const decodedId = CitizenIdentificationInfoNumber ? atob(CitizenIdentificationInfoNumber) : "";
       const actionAsync = getCarContractgroupReducercarAsyncApi({
@@ -161,7 +160,7 @@ export default function CustomerinfoDetail({ }: Props) {
     const lastName: string = words[words.length - 1];
     firstCharacter = lastName.charAt(0);
   }
-  console.log("!2", firstCharacter)
+
   const dataLoad = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},];
   const dataLoadRow = [{}, {}, {}, {}, {},];
   return (

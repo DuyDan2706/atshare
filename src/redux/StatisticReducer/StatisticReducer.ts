@@ -118,7 +118,7 @@ export const getStatisticContractGr = createAsyncThunk(
   }): Promise<StatisticContractResult[]> => {
     try {
       // const to = new Date((filter.to as Date).toLocaleDateString());
-      console.log("ngay ne", filter.from, filter.to);
+     
       const response = await http.get(
         `/statistic/contractGroup?from=${filter.from}&to=${filter.to}`
       );
@@ -138,7 +138,7 @@ export const getStatisticCar = createAsyncThunk(
   }): Promise<StatisticCarResult[]> => {
     try {
       // const to = new Date((filter.to as Date).toLocaleDateString());
-      console.log("ngay ne", filter.from, filter.to);
+
       const response = await http.get(
         `/statistic/car?from=${filter.from}&to=${filter.to}`
       );

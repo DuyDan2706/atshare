@@ -484,10 +484,7 @@ export default function TransferContract(props: any) {
       file: null,
     },
   ]);
-  console.log(
-    carFiles.length > 8 || (carFilesAlready?.length ?? 0) > 3,
-    carFiles
-  );
+ 
   function handleChangeStatusContractGroup(values: any) {
     const actionPutContractGroup =
       putStatusCarContractgroupReducercarAsyncApi(values);

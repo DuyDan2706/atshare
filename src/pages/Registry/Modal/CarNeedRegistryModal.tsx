@@ -201,7 +201,7 @@ export const CarNeedRegistryModal = (props: any) => {
           }
         })
       
-        console.log("123", values)
+      
         setSubmitting(false);
       } catch (error) {
         setSubmitting(false);
@@ -230,7 +230,7 @@ export const CarNeedRegistryModal = (props: any) => {
 
 
    
-    console.log("ma mày ngu quá vậy", formik.values)
+  
     return (
       <>
         <BootstrapDialog

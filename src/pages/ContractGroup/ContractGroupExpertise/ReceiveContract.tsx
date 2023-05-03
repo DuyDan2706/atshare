@@ -721,7 +721,7 @@ export default function ReceiveContract(props: any) {
       !frmReceiveContract.values.detectedViolations
     );
   }
-  console.log("1", carFilesAlready);
+
   let ButtonView;
   let expertiseView;
   if (contractgroupDetails.contractGroupStatusId == 11) {

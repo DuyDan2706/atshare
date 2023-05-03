@@ -74,7 +74,7 @@ export default function CarNeedRegistry({ }: Props) {
     setPagination({ page: 1, pageSize: +event.target.value });
     setPage(0);
   };
-  console.log("dan", CarNeedRegistry.total)
+
   const dispatch: DispatchType = useDispatch();
 
   let getAllcarmaitance: () => void;

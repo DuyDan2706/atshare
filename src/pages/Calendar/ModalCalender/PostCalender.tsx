@@ -171,7 +171,7 @@ export const PostCalender = (props: any) => {
       }));
     };
 
-    console.log("ma mày ngu quá vậy", formik.values)
+   
     return (
       <>
         <BootstrapDialog

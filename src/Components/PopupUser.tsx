@@ -390,7 +390,7 @@ export const PopupUser = (props: any) => {
     frmUser.setFieldValue("role", e);
 
   }
-  console.log("1234", frmUser.values, userDad);
+ 
 
   let viewPass: any;
   if (Profile?.id != frmUser.values.id) {
@@ -419,7 +419,7 @@ export const PopupUser = (props: any) => {
       </div>
     );
   }
-  console.log("dan11111111111111111111111111111111111", frmUser.values)
+
   const renderPopupUI = () => {
     return (
       <>
@@ -847,6 +847,6 @@ export const PopupUser = (props: any) => {
     id: item.id,
     label: item.name,
   })) : [{ label: 'The Shawshank Redemption', id: 1 }];
-  console.log("nicexu", frmUser.errors, frmUser.values)
+ 
   return <>{renderPopupUI()}</>;
 };

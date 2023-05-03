@@ -176,8 +176,7 @@ export default function Parkingdetail() {
   const { alertAction, error, message, CarActiveResult, showPopup, loading } = useSelector((state: RootState) => state.CarResult);
   const {  userListdetail } = useAppSelector((state: RootState) => state.user);
 
-  console.log("userList",userListdetail)
-  console.log("CarActiveResult",CarActiveResult)
+
   const { carStatus } = useAppSelector((state: RootState) => state.carStatus);
   const { ParkingLot,parkinglotdetail } = useSelector((state: RootState) => state.ParkingLot)
 
@@ -242,7 +241,7 @@ export default function Parkingdetail() {
     }
   }
 
-  console.log("text",param1.id)
+
   const getParkingById = () => {
     const id: string | undefined = param.id;
     const decodedId = param.id ? atob(param.id) : "";

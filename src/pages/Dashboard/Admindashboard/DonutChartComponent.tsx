@@ -7,7 +7,7 @@ interface ChartProps {
 }
 
 const DonutChartComponent: React.FC<ChartProps> = ({ data, labels }) => {
-  console.log("hehe", data);
+
   const [series, setSeries] = useState(data);
   const [options, setOptions] = useState({
     chart: {

@@ -120,8 +120,6 @@ export const ModalStatus = (props: any) => {
  };
 
 
-  console.log("Modalstatus",formik.values)
-  console.log("Modalstatus",userDad?.carStatusId)
   const renderuUpdateModalUI = () => {
 
 

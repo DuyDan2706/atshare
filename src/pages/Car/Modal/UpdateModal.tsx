@@ -688,7 +688,7 @@ export const UpdateModal = (props: any) => {
 
 
 
-  console.log("dan", formik.values)
+
   const renderuUpdateModalUI = () => {
     return (
       <>

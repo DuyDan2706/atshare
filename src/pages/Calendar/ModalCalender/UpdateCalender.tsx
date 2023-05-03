@@ -192,9 +192,7 @@ export const UpdateCalender = (props: any) => {
       }));
     };
   
-    console.log("update calander", formik.values)
-    console.log("dan12345", userDad?.carStatusId)
-    console.log("carId", event?.carId)
+  
 
     return (
       <>

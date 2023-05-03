@@ -250,7 +250,6 @@ export default function CarDetail() {
     CarExpenseDetail,
   } = useSelector((state: RootState) => state.CarResult); //r
 
-  console.log("CarExpenseDetail", CarExpenseDetail)
   const [open1, setOpen1] = useState(false);
   const today = dayjs();
   let callbackFunctionPopup1 = (childData: any) => {
@@ -277,7 +276,7 @@ export default function CarDetail() {
   const rows = CarResultDetail ? createData(CarResultDetail) : null;
   const row1s = Array.isArray(CarExpenseDetail) ? createData1(CarExpenseDetail) : null;
 
-  console.log("dan11", row1s)
+
   const param = useParams();
   const decodedId = param.id ? atob(param.id) : "";
   const getProductById = () => {

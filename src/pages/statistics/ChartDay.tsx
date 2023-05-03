@@ -51,7 +51,7 @@ const BarChart = (props: any) => {
       },
     }));
   }, [data, total]);
-  console.log("hehe", `Tổng doanh thu từ hợp đồng là: ${total} ₫`,)
+
   return (
     <>
       <ReactApexChart

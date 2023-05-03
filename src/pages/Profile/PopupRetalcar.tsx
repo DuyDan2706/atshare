@@ -353,15 +353,12 @@ export const PopupRetalcar = (props: any) => {
                     )
                       .then((response: any) => {
                         if (response.payload != undefined) {
-                          console.log(
-                            "1234",
-                            response.payload.customerFiles[0].documentImg
-                          );
+                        
                           formik.setFieldValue(
                             "customerCitizenIdentificationInfoAddress",
                             response.payload.citizenIdentificationInfoAddress
                           );
-                          console.log("12", response.payload.citizenIdentificationInfoDateReceive)
+                     
 
                           formik.setFieldValue(
                             "customerCitizenIdentificationInfoDate",
@@ -443,7 +440,7 @@ export const PopupRetalcar = (props: any) => {
                         }
                       })
                       .catch((error) => {
-                        console.log(123, error);
+                    
                       });
                     setSelectedFrontOption("file");
                     setSelectedImageCMNDBefore(file3);
@@ -814,7 +811,7 @@ export const PopupRetalcar = (props: any) => {
     getAllcarMake();
     return () => { };
   }, []);
-  console.log("123456", formik.values, formik.touched);
+ 
 
   const handleClickRend = () => {
     setRend(!rend);
@@ -835,10 +832,7 @@ export const PopupRetalcar = (props: any) => {
   let CloseImg = (childData: any) => {
     setOpenImg(childData);
   };
-  console.log(
-    "12345678",
-    formik.values.rentFrom
-  );
+
   const requireDescriptionInfoSeatNumber = [4, 5, 7];
   const requireDescriptionInfoCarColor = [
     "Đỏ",

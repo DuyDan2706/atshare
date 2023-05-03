@@ -166,7 +166,7 @@ export default function Admindashboard() {
   //     updateSeries(expensesByMonthRef);
   //   }
   // }, []);
-  console.log("nguly", expensesByMonthRef.current, series, Statistic)
+ 
 
   let etcmoneyUsingSum: number = 0;
   let fuelMoneyUsingUsingSum: number = 0;

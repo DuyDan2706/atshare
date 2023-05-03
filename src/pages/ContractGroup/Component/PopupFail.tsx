@@ -89,7 +89,7 @@ export const PopupFail = (props: any) => {
         documentImg: null,
         documentDescription: item.documentDescription,
       }));
-  console.log("123", dataNewFilesList, dataNewFiles, isCar, data);
+
   const body = {
     ToEmail: "phuchlhse140849@fpt.edu.vn",
     Subject: `[ATSHARE] Thông báo yêu cầu thuê xe đơn ${data.id}`,

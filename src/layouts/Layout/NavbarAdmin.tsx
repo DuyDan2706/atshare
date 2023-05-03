@@ -64,7 +64,7 @@ export default function NavbarAdmin(props: any) {
   const dispatch: DispatchType = useDispatch();
   useEffect(() => {
     //call api
-    console.log("dotvua", userLogin)
+   
     if (userLogin === null) {
       dispatch(userAction.userLogin());
     } else {

@@ -126,7 +126,7 @@ export default function UserManagement() {
   const dispatch: DispatchType = useDispatch();
   const { alertAction, error, message, userList, showPopup, loading } =
     useAppSelector((state: RootState) => state.user);
-  console.log("userList", userList)
+
   const [valueRadio, setValueRadio] = useState(1);
   const [search, setSearh] = useState("");
 

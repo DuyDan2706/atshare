@@ -232,7 +232,7 @@ export default function AppraisalRecord(props: any) {
           dispatch(
             getByIdAppraisalRecordReducerAsyncApi(contractgroupDetails.id)
           );
-          console.log("ngudan123", response.payload)
+    
           dispatch(
             putCarupdatestatusAsyncApi({
               id: frmAppraisalRecord.values.carId,
@@ -294,7 +294,7 @@ export default function AppraisalRecord(props: any) {
     if (AppraisalRecord.id != 0) {
       frmAppraisalRecord.setValues(AppraisalRecord);
       ApiCarById(AppraisalRecord.carId)
-      console.log("111", "da bam")
+
     } else {
       frmAppraisalRecord.setValues(initialValues);
     }
@@ -317,8 +317,7 @@ export default function AppraisalRecord(props: any) {
   const selectedCar = CarResult.cars.find(
     (car) => car.id === frmAppraisalRecord.values.carId
   );
-  console.log("111", frmAppraisalRecord.values.carId)
-  console.log("1234567", frmAppraisalRecord.errors)
+
 
   let expertiseView;
   if (contractgroupDetails.contractGroupStatusId !== 1) {
@@ -781,7 +780,7 @@ export default function AppraisalRecord(props: any) {
                           ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                           : rows
                         )).map((row, index) => {
-                          console.log("12345", row);
+                     
                           return (
                             <TableRow
 

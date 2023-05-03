@@ -191,7 +191,7 @@ export const CarMaintenanceInfoDetailUpdate = (props: any) => {
   };
 
 
-  console.log("dan", formik.values)
+
 
   const renderuUpdateModalUI = () => {
 

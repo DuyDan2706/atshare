@@ -85,7 +85,7 @@ export default function Profile() {
     CitizenIdentificationInfoNumber:null
     
   };
-  console.log("userProfile.id", userProfile.id != null ? userProfile.id : null);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open1 = Boolean(anchorEl);
   const [open, setOpen] = useState(false);

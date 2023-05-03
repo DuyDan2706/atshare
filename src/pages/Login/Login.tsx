@@ -89,7 +89,7 @@ export default function Login() {
           break;
       }
       navigate(url);
-      console.log("dan1111111111111111", url);
+    
     }
   }, [userLogin, navigate]);
   const frmLogin = useFormik<UserLoginModel>({

@@ -121,9 +121,9 @@ export const PopupCarDetail = (props: any) => {
     const { contractgroup } = useAppSelector(
         (state: RootState) => state.ContractGroup
     );
-    console.log("data1", data)
+
     function createData(data: any, index: number) {
-        console.log("hehehihi", data)
+
         let contractDay = contractgroup.contracts.find((x: any) => x.id == data.contractGroupId)
         let day = data.isExpense == true ?  new Date(data.day).toLocaleDateString() : contractDay !== undefined && contractDay.rentFrom !== null
             ? dayjs(contractDay.rentFrom).format('DD/MM/YYYY')
@@ -145,7 +145,7 @@ export const PopupCarDetail = (props: any) => {
     const rows = newArray != undefined ? newArray.map((data: any, index: number) => {
         return createData(data, index);
     }) : undefined;
-    console.log("hehe", newArray)
+
     const renderPopupUI = () => {
         return (
             <>

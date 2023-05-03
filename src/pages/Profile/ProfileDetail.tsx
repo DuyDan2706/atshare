@@ -800,7 +800,7 @@ export default function ProfileDetail(props: any) {
     setOpenImg(childData);
   };
 
-  console.log(".123", AppraisalRecord)
+
   const handleClickOpenConfirm = (value: number) => {
     setOpenConfirm(true);
     setIdDelete(value);

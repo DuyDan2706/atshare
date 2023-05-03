@@ -474,7 +474,7 @@ export default function CarList() {
                   window.URL.revokeObjectURL(url);
                 }, 0);
               }
-              console.log("el2", successCount, errorDataExcel.length)
+            
             } else {
               const isErrorItem = data.find((x: any) => x.__EMPTY_1 === item.carLicensePlates);
               errorDataExcel.push(item);

@@ -292,7 +292,7 @@ export default function Statistic() {
         contractGroupId: item.contractGroupId,
         total: item.total,
       }))
-      console.log("nguquaz", item.carExpenses)
+    
       // const carExpensesTotal = item.carExpenses.reduce((total: number, expense: any) => total + expense.amount, 0)
       const carExpensesTotal = carExpenses.reduce((total: number, expense: carExpensesResult) => total + expense.amount, 0);
       let carExpensesTotalne = formatToVND(carExpensesTotal);
@@ -314,7 +314,7 @@ export default function Statistic() {
     }] : [...dataExcel, {
       "Xe": "Tổng Doanh thu", "Doanh thu": formatToVND(carRevenuesTotal), "Chi phí": formatToVND(carExpensesTotal), "Lợi nhuận": formatToVND(carRevenuesTotal - carExpensesTotal),
     }];
-    console.log("excel bam r ");
+   
     const worksheet = XLSX.utils.json_to_sheet(lastData);
 
     // Create workbook and add worksheet
@@ -429,7 +429,7 @@ export default function Statistic() {
     let violationMoney = formatToVND(data.violationMoney);
     let total = formatToVND(data.total);
     let contractDay = contractgroup.contracts.find((x: any) => x.id == data.contractGroupId)
-    console.log("gge", contractDay?.rentFrom)
+   
     let Day: string = contractDay !== undefined && contractDay.rentFrom !== null
       ? dayjs(contractDay.rentFrom).format('DD/MM/YYYY')
       : "";
@@ -499,7 +499,7 @@ export default function Statistic() {
   const dataLoadCar = [{}, {}, {}, {}, {}];
   const dataLoadRow = [{}, {}, {}, {}, {}, {}, {}, {},{},{}];
   const dataLoadRowCar = [{}, {}, {}, {}, {}, {}];
-  console.log("hai", etcmoneyUsingSum, page, rowsPerPage);
+ 
   const buttonView = () => (
     <div className="lg:flex gap-5">
       <div>

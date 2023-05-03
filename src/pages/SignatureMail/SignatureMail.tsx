@@ -49,12 +49,7 @@ export default function SignatureMail() {
     };
   }, []);
 
-  console.log(
-    "id",
-    id,
-    rentContractDetail,
-    rentContractDetail?.customerSignature
-  );
+
   const dispatch: DispatchType = useDispatch();
   const handleUpdatePdfRentContract = () => {
     const imageRef = ref(storage, `images/${new Date().getTime()}.png`);
@@ -92,7 +87,7 @@ export default function SignatureMail() {
         });
       })
       .catch((error) => {
-        console.error("Error uploading image:", error);
+  
       });
   };
   let buttonView;

@@ -350,7 +350,7 @@ export const PopupPdf = (props: any) => {
           });
         })
         .catch((error) => {
-          console.error("Error uploading image:", error);
+         
           setPopupLoading(false);
         });
     } else {
@@ -389,7 +389,7 @@ export const PopupPdf = (props: any) => {
         )
       );
 
-      console.log("ngudandan2", urls, snapshots)
+     
       dispatch(
         postRentContractFilesReducerAsyncApi(urls)
       ).then((response) => {
@@ -413,7 +413,7 @@ export const PopupPdf = (props: any) => {
 
     }
   };
-  console.log("ngudandan", rentContractFiles)
+  
   async function handleUpdatePdfReceiveContract() {
     try {
       setPopupLoading(true);
@@ -464,7 +464,7 @@ export const PopupPdf = (props: any) => {
         setPopupLoading(false);
       }
     } catch (error) {
-      console.error("Error uploading images:", error);
+      
       setPopupLoading(false);
     }
   }
@@ -518,7 +518,7 @@ export const PopupPdf = (props: any) => {
         }
       });
     } catch (error) {
-      console.error("Error uploading images:", error);
+     
       setPopupLoading(false);
     }
     // Call your API update function here

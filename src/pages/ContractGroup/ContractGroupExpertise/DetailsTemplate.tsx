@@ -5,7 +5,7 @@ import { NavLink, useParams } from "react-router-dom";
 import CheckingProgress from "./CheckingProgress";
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
-  console.info("You clicked a breadcrumb.");
+
 }
 export default function DetailsTemplateExpertise(props: any) {
   const { id } = useParams();
