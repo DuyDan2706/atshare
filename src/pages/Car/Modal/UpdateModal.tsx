@@ -157,8 +157,8 @@ export const UpdateModal = (props: any) => {
   ];
 
   const rentalMethod = [
-    'Ủy Thác Ngày ',
-    'Thuê Khô ',
+    'Ủy Thác Ngày',
+    'Thuê khô',
     '7',
   ];
   // const periodicMaintenanceLimit =[
@@ -545,7 +545,7 @@ export const UpdateModal = (props: any) => {
       trackingUsername: Yup.string().required("Tài khoản Tracking không để trống!"),
       trackingPassword: Yup.string().required("mật khẩu Tracking không để trống!"),
       etcusername: Yup.string().required("tài khoản ETC không để trống!"),
-      carDescription: Yup.string().min(6, 'Quá Ngắn!').max(10000, 'Quá dài!').required('Mô tả xe không được để trống'),
+      carDescription: Yup.string().min(6, 'Quá Ngắn!').max(10000, 'Quá dài!'),
       etcpassword: Yup.string().required("Mật khẩu ETC không để trống!"),
       linkTracking: Yup.string().required("trang link không được để trống"),
       tankCapacity: Yup.number()
