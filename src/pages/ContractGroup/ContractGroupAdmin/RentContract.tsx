@@ -193,7 +193,7 @@ export default function RentContract(props: any) {
   if (contractgroupDetails.contractGroupStatusId == 5) {
     ButtonView = (
       <>
-        <Button
+        {/* <Button
           type="submit"
           className="btn-choose-car mr-5"
           sx={{ ml: 2 }}
@@ -202,7 +202,7 @@ export default function RentContract(props: any) {
           onClick={handleChangeCreateContract}
         >
           TẠO HỢP ĐỒNG
-        </Button>
+        </Button> */}
       </>
     );
   } else if (contractgroupDetails.contractGroupStatusId == 6) {
@@ -217,14 +217,14 @@ export default function RentContract(props: any) {
         >
           XEM PDF
         </Button>
-        <Button
+        {/* <Button
           color="error"
           className="btn-choose-car mr-5"
           variant="contained"
           onClick={handleClickOpenFail}
         >
           THẤT BẠI
-        </Button>
+        </Button> */}
       </>
     );
   } else if (contractgroupDetails.contractGroupStatusId == 7) {

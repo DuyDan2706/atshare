@@ -486,22 +486,22 @@ export default function ContractGroupDetail(props: any) {
   if (contractgroupDetails.contractGroupStatusId == 1) {
     viewButtonAdminAndExpertise = (
       <>
-        <Button
+        {/* <Button
           className="btn-choose-car mr-5"
           sx={{ ml: 2 }}
           variant="contained"
           onClick={handleChangeCheckCar}
         >
           HOÀN TẤT
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           className="btn-choose-car mr-5"
           variant="contained"
           color="error"
           onClick={handleClickOpenAdd}
         >
           THẤT BẠI
-        </Button>
+        </Button> */}
       </>
     );
   }

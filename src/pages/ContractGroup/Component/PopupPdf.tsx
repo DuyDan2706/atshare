@@ -47,6 +47,7 @@ import { storage } from "../../../util/FirebaseConfig";
 import { closestIndexTo } from "date-fns/esm";
 import { putStatusCarContractgroupReducercarAsyncApi } from "../../../redux/ContractgroupReducer/ContractgroupReducer";
 import { useAppSelector } from "../../../hooks";
+import PopupImage from "../../../Components/PopupImage";
 
 function generateUniqueId(existingIds: number[]): number {
   let newId: number;
@@ -147,7 +148,7 @@ export const PopupPdf = (props: any) => {
   } = props;
   const dispatch: DispatchType = useDispatch();
   const { user } = useAppSelector((state: RootState) => state.user);
-  
+
   console.log("ngudandan2", data, dataContract, user && user.email)
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -159,7 +160,15 @@ export const PopupPdf = (props: any) => {
     file: File | null;
   }
   const userEmail = user != null ? user.email : "";
-
+  const [openImg, setOpenImg] = useState(false);
+  const [imgSrc, setImgSrc] = useState();
+  const haneleClickOpenImg = (newValue: any) => {
+    setImgSrc(newValue);
+    setOpenImg(true);
+  };
+  let CloseImg = (childData: any) => {
+    setOpenImg(childData);
+  };
   const body = {
     ToEmail: `${dataContract && dataContract.staffEmail}`,
     Subject: `[ATSHARE] Thông báo hợp đồng thuê xe ${data && data.contractGroupId}`,
@@ -205,7 +214,7 @@ export const PopupPdf = (props: any) => {
                  color: ##DCDCDC;
                  font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
                     font-size: 20px;
-                    margin: 0;">Lưu ý: Vui lòng photo và mang cho khách ký, cập nhật lên lại hệ thống (<a href="https://atshare.vercel.app/">tại đây</a>)</p>  
+                    margin: 0;">Lưu ý: Vui lòng photo và mang cho khách ký, cập nhật lên lại hệ thống (<a href="https://atshare.vercel.app/profiledetail/${data && data.contractGroupId}">tại đây</a>)</p>  
 </body></html>`,
 
   };
@@ -254,16 +263,18 @@ export const PopupPdf = (props: any) => {
                  color: ##DCDCDC;
                  font-family: " Nunito Sans", "Helvetica Neue" , sans-serif;
                     font-size: 20px;
-                    margin: 0;">Lưu ý: Vui lòng cập nhật tình trạng hợp đồng (<a href="https://atshare.vercel.app/">tại đây</a>)</p>  
+                    margin: 0;">Lưu ý: Vui lòng cập nhật tình trạng hợp đồng (<a href="https://atshare.vercel.app/Expertise/ContractGroup/ContractGroupDetail/${data && data.contractGroupId}">tại đây</a>)</p>  
 </body></html>`,
 
   };
 
   const [contractFiles, setContractFiles] = useState<DataListFileFireBase[]>([]);
   const handleClickOpenDelete = (id: number) => {
+    console.log("ngunene1", contractFiles)
     const newArrayListFile = [...contractFiles];
     const filteredList = newArrayListFile.filter((x) => x.id !== id);
     setContractFiles(filteredList);
+    console.log("ngunene12", contractFiles)
   };
   const handleFileOtherInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -580,7 +591,7 @@ export const PopupPdf = (props: any) => {
               <Button
                 variant="contained"
                 component="label"
-                className={dataContract.contractGroupStatusId <= 6 && role == "sale" ? "bg-white text-[#1976d2] shadow-none rounded-md " : "hidden"}
+                className={dataContract.contractGroupStatusId <= 7 && role == "sale" ? "bg-white text-[#1976d2] shadow-none rounded-md " : "hidden"}
               >
                 <AddPhotoAlternateIcon /> Thêm ảnh
                 <input
@@ -599,10 +610,16 @@ export const PopupPdf = (props: any) => {
                     {rentContractFiles.length > 0 && rentContractFiles?.map((image: any, index: number) => {
                       return (
                         <div key={index} className="relative">
+                          <ClearOutlinedIcon
+                            onClick={() =>
+                              handleClickOpenDelete(image.id)
+                            }
+                            className="absolute    left-0 top-0  mt-1 mx-1 items-start flex-nowrap    m-2 hover:text-red-400 cursor-pointer hover:bg-gray-100 shadow-md  shadow-gray-400 border-[1px] bg-white border-gray-400 rounded-md  text-black"
+                          />
                           <img
-                            // onClick={() =>
-                            //   haneleClickOpenImg(image.documentImg)
-                            // }
+                            onClick={() =>
+                              haneleClickOpenImg(image.documentImg)
+                            }
                             src={image.documentImg}
                             className="w-32 h-32"
                           />
@@ -620,9 +637,9 @@ export const PopupPdf = (props: any) => {
                               className="absolute    left-0 top-0  mt-1 mx-1 items-start flex-nowrap    m-2 hover:text-red-400 cursor-pointer hover:bg-gray-100 shadow-md  shadow-gray-400 border-[1px] bg-white border-gray-400 rounded-md  text-black"
                             />
                             <img
-                              // onClick={() =>
-                              //   haneleClickOpenImg(image.documentImg)
-                              // }
+                              onClick={() =>
+                                haneleClickOpenImg(image.documentImg)
+                              }
                               src={image.documentImg}
                               className="w-32 h-32"
                             />
@@ -633,9 +650,9 @@ export const PopupPdf = (props: any) => {
                         return (
                           <div key={index}>
                             <img
-                              // onClick={() =>
-                              //   haneleClickOpenImg(image.documentImg)
-                              // }
+                              onClick={() =>
+                                haneleClickOpenImg(image.documentImg)
+                              }
                               src={image.documentImg}
                               className={
                                 image.documentImg == ""
@@ -824,6 +841,7 @@ export const PopupPdf = (props: any) => {
             </DialogActions>
           </form>
         </BootstrapDialog>
+        <PopupImage src={imgSrc} CloseImg={CloseImg} openImg={openImg} />
       </>
     );
   };

@@ -388,7 +388,7 @@ export default function AppraisalRecord(props: any) {
         >
           XEM PDF
         </Button> */}
-        <Button
+        {/* <Button
           className="btn-choose-car mr-5"
           variant="contained"
           onClick={() =>
@@ -399,13 +399,13 @@ export default function AppraisalRecord(props: any) {
           }
         >
           HOÀN THÀNH
-        </Button>
+        </Button> */}
       </>
     );
   } else if (contractgroupDetails.contractGroupStatusId === 1) {
     buttonStatus = (
       <>
-        <Button
+        {/* <Button
           type="submit"
           className="btn-choose-car mr-5"
           sx={{ ml: 2 }}
@@ -413,7 +413,7 @@ export default function AppraisalRecord(props: any) {
           color="success"
         >
           Kiểm Duyệt
-        </Button>
+        </Button> */}
         <Button
           color="error"
           className="btn-choose-car mr-5"

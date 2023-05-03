@@ -722,7 +722,7 @@ export default function ReceiveContract(props: any) {
   if (contractgroupDetails.contractGroupStatusId == 11) {
     ButtonView = (
       <>
-        <Button
+        {/* <Button
           type="submit"
           className="btn-choose-car mr-5"
           sx={{ ml: 2 }}
@@ -731,7 +731,7 @@ export default function ReceiveContract(props: any) {
           // onClick={handleChangeCreateContract}
         >
           TẠO HỢP ĐỒNG
-        </Button>
+        </Button> */}
         <Button
           color="error"
           className="btn-choose-car mr-5"

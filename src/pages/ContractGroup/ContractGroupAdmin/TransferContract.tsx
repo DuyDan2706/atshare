@@ -591,7 +591,7 @@ export default function TransferContract(props: any) {
   if (contractgroupDetails.contractGroupStatusId == 8) {
     ButtonView = (
       <>
-        <Button
+        {/* <Button
           type="submit"
           className="btn-choose-car mr-5"
           sx={{ ml: 2 }}
@@ -600,14 +600,14 @@ export default function TransferContract(props: any) {
         // onClick={handleChangeCreateContract}
         >
           Tạo biên bản
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           color="error"
           className="btn-choose-car mr-5"
           variant="contained"
         >
           THẤT BẠI
-        </Button>
+        </Button> */}
       </>
     );
   } else if (contractgroupDetails.contractGroupStatusId == 9) {
