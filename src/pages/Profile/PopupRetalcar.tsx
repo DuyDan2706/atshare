@@ -46,7 +46,7 @@ import { storage } from "../../util/FirebaseConfig";
 // const apiKey = "cnILsGzlt93LXeRJPcPDrHzDyMl2lvNr";
 // =======
 import 'dayjs/locale/en';
-const apiKey = "raH5tVUHaiO4jL5zLReWnfVnS8Ns3eKO";
+const apiKey = "cnILsGzlt93LXeRJPcPDrHzDyMl2lvNr";
 
 
 const apiUrl = "https://api.fpt.ai/vision/idr/vnm";
