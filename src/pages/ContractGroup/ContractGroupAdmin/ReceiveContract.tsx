@@ -12,6 +12,7 @@ import {
   TextField
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { NavLink } from 'react-router-dom';
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
@@ -2023,14 +2024,15 @@ export default function ReceiveContract(props: any) {
           <hr className="mt-2" />
           <div className="mt-5 flex mb-20">
             {ButtonView}
-
+            <NavLink to="/Admin/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
               variant="contained"
             >
-              HUỶ BỎ
+              QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>

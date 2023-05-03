@@ -5,6 +5,7 @@ import {
   TextField, TablePagination, Tooltip
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { NavLink } from 'react-router-dom';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -1105,6 +1106,7 @@ export default function AppraisalRecord(props: any) {
           <hr className="mt-2" />
           <div className="mt-5 flex mb-20">
             {buttonStatus}
+            <NavLink to="/Expertise/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
@@ -1112,6 +1114,7 @@ export default function AppraisalRecord(props: any) {
             >
              QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>

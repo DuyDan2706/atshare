@@ -397,7 +397,7 @@ export default function CarDetail() {
 
     //frmUser.setValues(user);
   };
-
+  const encodedId = btoa(String(CarResultDetail?.id));
   const handleClickOpenadd = (carId: number | null) => {
     setOpen1(true);
     dispatch(carAction.showPopup());
@@ -755,9 +755,9 @@ export default function CarDetail() {
                 <span className="flex items-center">THÔNG TIN BẢO DƯỠNG</span>
               </h2>
               <Tooltip title="Chi tiết bảo dưỡng">
-
+                    
                 <Link
-                  to={`/Admin/CarMaintenanceInfo/CarMaintenanceInfoDetail/${CarResultDetail?.id}`}
+                  to={`/Admin/CarMaintenanceInfo/CarMaintenanceInfoDetail/${encodedId}`}
                   className="flex items-center"
                 >
                   <ArrowForwardIosIcon className="mt-4 mx-2" />
@@ -1004,7 +1004,7 @@ export default function CarDetail() {
       <ModalpostcarExpense
         openDad={open1}
         parentCallback={callbackFunctionPopup2}
-        carId={param.id}
+        carId={decodedId}
         parentCallbackAlert={callbackFunctionAlert}
         parentCallbackMessageAlert={callbackFunctionMessageAlert}
 

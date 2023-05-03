@@ -172,11 +172,15 @@ export const CarNeedRegistryUpdate = (props: any) => {
           const rightImageRef = ref(storage, `images/${selectedImage.name + v4()}`);
           const rightSnapshot = uploadBytes(rightImageRef, selectedImage);
           promises.push(rightSnapshot);
+        }else {
+          values.registryInvoice = userDad?.registryInvoice; // Set current URL if no new image selected
         }
         if (selectedbackImage) {
           const backImageRef = ref(storage, `noimg/${selectedbackImage.name + v4()}`);
           const backSnapshot = uploadBytes(backImageRef, selectedbackImage);
           promises.push(backSnapshot);
+        }else {
+          values.certificateRegistryDocument = userDad?.certificateRegistryDocument; // Set current URL if no new image selected
         }
         
         const snapshots = await Promise.all(promises);
@@ -184,9 +188,9 @@ export const CarNeedRegistryUpdate = (props: any) => {
         const urls = await Promise.all(
           snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
         );
- 
-        values.registryInvoice = urls[0];
-        values.certificateRegistryDocument = urls[1];
+        if (urls[0]) values.registryInvoice = urls[0];
+        if (urls[1])  values.certificateRegistryDocument = urls[1];
+        
 
         const actionAsyncLogin = putCarNeedRegistryApi(values);
         dispatch(actionAsyncLogin)

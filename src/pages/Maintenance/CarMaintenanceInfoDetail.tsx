@@ -258,47 +258,58 @@ export default function CarMaintenanceInfoDetail({ }: Props) {
         </div>
       </div>
       <div className="mx-5 mb-5">
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-          <TableContainer sx={{ minHeight: 700, maxHeight: 700 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow  sx={{
-                    backgroundColor: "rgb(219 234 254)",
-                  }}
-                  component="div"
-                  >
-                  {columns.map((column) => (
-                    <TableCell
-                    sx={{
-                      backgroundColor: "rgb(219 234 254)",
-                    }}
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ minHeight: 700, maxHeight: 700 }}>
+        <Table  component="table" stickyHeader aria-label="sticky table">
+          <TableHead  component="thead">
+            <TableRow   component="tr">
+              {columns.map((column) => (
+                <TableCell
+                sx={{
+                  backgroundColor: "rgb(219 234 254)",
+                }}
+                  component="th"
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                  className="font-bold"
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody component="tbody">
+            {rows.map((row, index) => {
+              return (
+                <TableRow
+                 
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={index}
+                  component="tr"
+                >
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell
+                        component="td"
+                        key={column.id}
+                        align={column.align}
+                        //className="py-[5px] px-2"
+                      >
+                        {column.format && typeof value === "number"
+                          ? column.format(value)
+                          : value}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows ? rows.map((row, index) => {
-                  return (
-                    <TableRow  role="checkbox" tabIndex={-1} key={index}>
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                }) : null}
-              </TableBody>
-            </Table>
-          </TableContainer>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
           <TablePagination
             labelRowsPerPage={"Số lượng của trang"}
             className=""

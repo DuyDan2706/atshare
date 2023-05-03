@@ -8,6 +8,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useFormik } from "formik";
+import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
@@ -915,13 +916,15 @@ export default function AppraisalRecord(props: any) {
           <hr className="mt-2" />
           <div className="mt-5 flex mb-20">
             {buttonStatus}
+            <NavLink to="/Admin/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
               variant="contained"
             >
-              HUỶ BỎ
+               QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>

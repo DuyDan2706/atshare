@@ -29,6 +29,7 @@ import { v4 } from "uuid";
 import * as yup from "yup";
 import { AlertComponent } from "../../../Components/AlertComponent";
 import PopupImage from "../../../Components/PopupImage";
+import { NavLink } from 'react-router-dom';
 import { useAppSelector } from "../../../hooks";
 import { AppraisalRecordAction } from "../../../redux/AppraisalRecordReducer/AppraisalRecordReducer";
 import {
@@ -2028,7 +2029,7 @@ export default function ReceiveContract(props: any) {
           <hr className="mt-2" />
           <div className="mt-5 flex mb-20">
             {ButtonView}
-
+            <NavLink to="/Expertise/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
@@ -2036,6 +2037,7 @@ export default function ReceiveContract(props: any) {
             >
              QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>

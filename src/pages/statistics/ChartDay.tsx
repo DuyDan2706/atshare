@@ -8,7 +8,7 @@ const BarChart = (props: any) => {
     options: {
       chart: {
         id: "basic-bar",
-       
+
       },
       xaxis: {
         categories: [
@@ -28,7 +28,7 @@ const BarChart = (props: any) => {
     },
     plotOptions: {
       bar: {
-   
+
       },
     },
 
@@ -58,7 +58,7 @@ const BarChart = (props: any) => {
         options={chartData.options}
         series={chartData.series}
         type="bar"
-        height={300}
+        height={280}
       />
     </>
   );

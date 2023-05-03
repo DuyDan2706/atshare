@@ -143,6 +143,8 @@ export const CarMaintenanceInfoDetailUpdate = (props: any) => {
           const rightImageRef = ref(storage, `images/${selectedImage.name + v4()}`);
           const rightSnapshot = uploadBytes(rightImageRef, selectedImage);
           promises.push(rightSnapshot);
+        }else {
+          values.maintenanceInvoice = userDad?.maintenanceInvoice; // Set current URL if no new image selected
         }
 
         const snapshots = await Promise.all(promises);
@@ -150,8 +152,8 @@ export const CarMaintenanceInfoDetailUpdate = (props: any) => {
         const urls = await Promise.all(
           snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
         );
-
-        values.maintenanceInvoice = urls[0];
+        if (urls[0]) values.maintenanceInvoice = urls[0];
+    
         const actionAsyncLogin = putCarMantaiceAsyncApi(values);
         dispatch(actionAsyncLogin)
         setSubmitting(false);

@@ -7,7 +7,7 @@ export default function HomeTemplate() {
   return (
    <>
    <Navbar />
-   <div >
+   <div className="bg-user-background  pt-5 " >
     <Outlet/>
    </div>
    

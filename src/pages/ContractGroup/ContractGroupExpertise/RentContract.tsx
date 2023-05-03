@@ -34,6 +34,7 @@ import { DispatchType, RootState } from "../../../redux/store";
 import { PopupFail } from "../Component/PopupFail";
 import { PopupHistory } from "../Component/PopupHistory";
 import { PopupPdf } from "../Component/PopupPdf";
+import { NavLink } from 'react-router-dom';
 function parseToVND(number: any) {
   let strNumber = number.toString().replace(/[.,]/g, "");
   strNumber = strNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -1019,7 +1020,7 @@ export default function RentContract(props: any) {
         <hr className="mt-2" />
         <div className="mt-5 flex mb-20">
           {ButtonView}
-
+          <NavLink to="/Expertise/ContractGroup" className="hover:underline">
           <Button
             color="inherit"
             className="btn-choose-car"
@@ -1027,6 +1028,7 @@ export default function RentContract(props: any) {
           >
             QUAY LẠI
           </Button>
+          </NavLink>
         </div>
       </div>
     </>

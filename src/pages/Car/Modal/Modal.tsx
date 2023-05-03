@@ -279,7 +279,7 @@ export const Modal = (props: any) => {
     initialValues: initialValues,
     validationSchema: Yup.object().shape({
       parkingLotId: Yup.number().required("Bãi xe Không được trống!").positive("Bãi xe Không được trống!"),
-      modelYear: Yup.number().positive("Đời xe không để trống!").required("Đời xe Không được trống!"),
+      modelYear: Yup.number().positive("Năm sản xuất không để trống!").required("Năm sản xuất Không được trống!"),
       carMakeId: Yup.string().required("Hãng xe Không được trống!"),
       carModelId: Yup.string().required("Tên xe Không được trống!"),
       carSeriesId: Yup.string().required("Kiểu dáng Không được trống!"),
@@ -296,7 +296,8 @@ export const Modal = (props: any) => {
       .typeError('Số km bảo trì lần cuối phải là số')
       .positive('Số km bảo trì lần cuối không được để trống')
       .integer('Số km bảo trì lần cuối không được để trống')
-      .required('Số km bảo trì lần cuối không được để trống'),
+      .required('Số km bảo trì lần cuối không được để trống').max(10000000000,"Số km bảo trì lần cuối không lớn hơn 10000000000"),
+      
       // rentalDate: Yup.date()
       //   .required("ngày thuê không được trống!")
       //   .nullable()
@@ -310,7 +311,7 @@ export const Modal = (props: any) => {
       speedometerNumberReceive: Yup.number()
         .typeError('Số km ngày nhận phải là số')
         .positive('Số km ngày nhận không được để trống')
-        .integer('Số km ngày nhận không được để trống')
+        .integer('Số km ngày nhận không được để trống').max(1000000000,"Số km ngày nhận không lớn hơn 1000000000")
         .required('Số km ngày nhận không được để trống').test('speedometerMatch', 'Số km ngày nhận khác với số đồng hồ cập nhật lần cuối', function(value) {
           return value === this.parent.speedometerNumber;
         }),
@@ -318,12 +319,12 @@ export const Modal = (props: any) => {
       limitedKmForMonthReceive: Yup.number()
         .typeError('Giới hạn số km trong tháng phải là số')
         .positive('Giới hạn số km trong tháng không được để trống')
-        .integer('Giới hạn số km trong tháng không được để trống')
+        .integer('Giới hạn số km trong tháng không được để trống').max(1000000000,"Giới hạn số km trong tháng không lớn hơn 1000000000")
         .required("Giới hạn số km trong tháng không được để trống"),
       overLimitedMileageReceive: Yup.number()
       .typeError('Phí vượt km trong tháng phải là số')
       .positive('Phí vượt km trong tháng không để trống')
-      .integer('Phí vượt km trong tháng không để trống')
+      .integer('Phí vượt km trong tháng không để trống').max(10000000,"Phí vượt km trong tháng không lớn hơn 10000000")
       .required("Phí vượt km trong tháng không để trống"),
       // .test('checkReceiveFee', 'Phí vượt km trong tháng nhận không được lớn hơn phí vượt km trong tháng', function (value) {
       //   const overLimitedMileage = this.parent.overLimitedMileage;
@@ -331,7 +332,7 @@ export const Modal = (props: any) => {
       // }
       // ),
         priceForDayReceive: Yup.number()
-        .min(10000, "Giá cho ngày thuê phải lớn hơn 1000")
+        .min(100000, "Giá cho ngày thuê phải lớn hơn 100000").max(100000000,"Giá cho ngày thuê không lớn hơn 100000000")
         .test(
           "price-for-day-receive-less-than-normal-day",
           "Giá cho ngày thuê phải nhỏ hơn giá cho ngày bình thường",
@@ -342,10 +343,11 @@ export const Modal = (props: any) => {
         )
         .required("Giá cho ngày thuê không được để trống"),
         ownerSlitRatio:Yup.number()
-        .positive('Tỉ lệ ăn chia của chủ xe không được để trống')
+        .positive('Tỉ lệ ăn chia của chủ xe không được để trống').min(1, "Tỉ lệ ăn chia của chủ xe phải lớn hơn hoặc bằng 1%").max(80,"Tỉ lệ ăn chia của chủ xe  không lớn hơn 80 %")
         .required("Tỉ lệ ăn chia của chủ xe không được để trống"),
         priceForMonthReceive: Yup.number()
-        .min(10000, "Giá cho tháng thuê phải lớn hơn 1000")
+        .min(100000, "Giá cho tháng thuê phải lớn hơn 100000")
+        .max(100000000,"Giá cho tháng thuê không lớn hơn 100000000")
         // .test(
         //   "price-for-month-receive-less-than-month",
         //   "Giá cho tháng thuê phải nhỏ hơn giá cho tháng thuê của chủ xe",
@@ -356,7 +358,7 @@ export const Modal = (props: any) => {
         // )
         .required("Giá cho tháng thuê không được để trống"),
         priceForMonth: Yup.number()
-        .min(10000, "Giá cho tháng thuê phải lớn hơn 10000")
+        .min(100000, "Giá cho tháng thuê phải lớn hơn 100000").max(100000000,"Giá cho tháng thuê không lớn hơn 100000000")
         .test(
           "price-for-month-greater-than-normal-day",
           "Giá cho tháng thuê phải lớn hơn giá cho ngày bình thường",
@@ -383,7 +385,8 @@ export const Modal = (props: any) => {
         )
         .required("Giá cho tháng thuê không được để trống"),
         priceForNormalDay: Yup.number()
-        .min(10000, "Giá cho ngày bình thường phải lớn hơn 10000"),
+        .min(100000, "Giá cho ngày bình thường phải lớn hơn hoặc bằng 100000")
+        .max(100000000,"Giá cho ngày bình thường không lớn hơn 100000000"),
         // .test(
         //   "price-for-normal-day-less-than-weekend-day",
         //   "Giá cho ngày bình thường phải nhỏ hơn giá cho ngày cuối tuần",
@@ -402,7 +405,7 @@ export const Modal = (props: any) => {
         // )
         // .required("Giá cho ngày bình thường không được để trống"),
         priceForWeekendDay: Yup.number()
-        .min(10000, "Giá cho ngày cuối tuần phải lớn hơn 10000")
+        .min(100000, "Giá cho ngày cuối tuần phải lớn hơn 100000").max(100000000,"Giá cho ngày cuối tuần không lớn hơn 100000000")
         // .test(
         //   "price-for-weekend-day-less-than-month",
         //   "Giá cho ngày cuối tuần phải nhỏ hơn giá cho tháng thuê",
@@ -424,7 +427,7 @@ export const Modal = (props: any) => {
         .typeError('Giới hạn km trong Tháng phải là số')
         .positive('Giới hạn km trong Tháng không được để trống')
         .integer('Giới hạn km trong Tháng không được để trống')
-        .required("Giới hạn km trong Tháng không được để trống")
+        .required("Giới hạn km trong Tháng không được để trống").max(100000000,"Giới hạn km trong Tháng không lớn hơn 100000000")
         .test('checkReceiveLimit', 'Giới hạn số km trong tháng nhận  lớn hơn giới hạn số km trong tháng', function (value) {
           const limitedKmForMonthReceive = this.parent.limitedKmForMonthReceive;
           return (value ?? 0) <= limitedKmForMonthReceive;
@@ -432,7 +435,7 @@ export const Modal = (props: any) => {
       overLimitedMileage: Yup.number()
         .typeError('Phí vượt km trong tháng phải là số')
         .positive('Phí vượt km trong thángkhông được để trống')
-        .integer('Phí vượt km trong tháng không được để trống')
+        .integer('Phí vượt km trong tháng không được để trống').max(100000000,"Phí vượt km trong tháng không lớn hơn 100000000")
         .required("Phí vượt km trong tháng không được để trống").test('checkReceiveFee', 'Phí vượt km trong tháng nhận không được lớn hơn phí vượt km trong tháng', function (value) {
           const overLimitedMileageReceive = this.parent.overLimitedMileageReceive;
           return (value ?? 0) > overLimitedMileageReceive;
@@ -440,7 +443,7 @@ export const Modal = (props: any) => {
       currentEtcAmount: Yup.number()
         .typeError('số tiền còn trong tài khoản ETC là số!')
         .positive('số tiền còn trong tài khoản ETC không được để trống!')
-        .integer('số tiền còn trong tài khoản ETC không được để trống!')
+        .integer('số tiền còn trong tài khoản ETC không được để trống!').max(100000000,"số tiền còn trong tài khoản ETC không lớn hơn 100000000")
         .required("số tiền còn trong tài khoản ETC không được để trống!"),
       fuelPercent: Yup.number()
         .typeError('Phần % nhiên liệu  phải là số')
@@ -451,7 +454,7 @@ export const Modal = (props: any) => {
       speedometerNumber: Yup.number()
         .typeError('Số đồng hồ cập nhật lần cuối phải là số !')
         .positive('Số đồng hồ cập nhật lần cuối không được để trống !')
-        .integer('Số đồng hồ cập nhật lần cuốikhông được để trống !')
+        .integer('Số đồng hồ cập nhật lần cuốikhông được để trống !').max(100000000,"Số đồng hồ cập nhật lần không lớn hơn 100000000")
         .required("Số đồng hồ cập nhật lần cuốikhông được để trống !"),
         // .oneOf([Yup.ref('speedometerNumberReceive')], 'Số km và Số km nhận không giống nhau'),
         tankCapacity: Yup.number()
@@ -854,7 +857,7 @@ useEffect(() => {
                     ) : null}
                   </FormControl>
                   <FormControl className="w-full mt-2  ">
-                    <InputLabel size="small">Đời xe*</InputLabel>
+                    <InputLabel size="small">Năm sản xuất*</InputLabel>
                     <Select
                       value={formik.values.modelYear || ""}
                       onChange={formik.handleChange}
@@ -864,7 +867,7 @@ useEffect(() => {
                           : undefined
                       }
                       onBlur={formik.handleBlur}
-                      label={"Đời xe*"}
+                      label={"Năm sản xuất*"}
                       name="modelYear"
                       size="small"
                     >

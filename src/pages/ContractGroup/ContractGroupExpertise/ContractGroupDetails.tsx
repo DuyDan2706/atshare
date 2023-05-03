@@ -32,6 +32,7 @@ import {
 import { DispatchType, RootState } from "../../../redux/store";
 import { PopupFail } from "../Component/PopupFail";
 import { PopupHistory } from "../Component/PopupHistory";
+import { NavLink } from 'react-router-dom';
 function parseToInputDate(dateString: any) {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -872,6 +873,7 @@ export default function ContractGroupDetail(props: any) {
           <div className="mt-5 flex mb-20">
             {viewButtonAdminAndExpertise}
             {viewButtonSale}
+            <NavLink to="/Expertise/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
@@ -879,6 +881,7 @@ export default function ContractGroupDetail(props: any) {
             >
              QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>

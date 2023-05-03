@@ -832,7 +832,7 @@ export default function Statistic() {
                   <TablePagination
                     labelRowsPerPage={"Số lượng của trang"}
                     className=""
-                    rowsPerPageOptions={[5, 25, 100]}
+                    rowsPerPageOptions={[4, 25, 100]}
                     labelDisplayedRows={({ from, to, count }) =>
                       `${from}-${to} trên ${count}`
                     }
@@ -1016,7 +1016,7 @@ export default function Statistic() {
                   <TablePagination
                     labelRowsPerPage={"Số lượng của trang"}
                     className=""
-                    rowsPerPageOptions={[5, 25, 100]}
+                    rowsPerPageOptions={[4, 25, 100]}
                     labelDisplayedRows={({ from, to, count }) =>
                       `${from}-${to} trên ${count}`
                     }

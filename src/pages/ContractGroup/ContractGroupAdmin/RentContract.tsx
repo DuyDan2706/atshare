@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AlertComponent } from "../../../Components/AlertComponent";
 import { useAppSelector } from "../../../hooks";
+import { NavLink } from 'react-router-dom';
 import {
   AppraisalRecordAction,
   getByIdAppraisalRecordReducerAsyncApi,
@@ -1000,14 +1001,15 @@ export default function RentContract(props: any) {
         <hr className="mt-2" />
         <div className="mt-5 flex mb-20">
           {ButtonView}
-
+          <NavLink to="/Admin/ContractGroup" className="hover:underline">
           <Button
             color="inherit"
             className="btn-choose-car"
             variant="contained"
           >
-            HUỶ BỎ
+            QUAY LẠI
           </Button>
+          </NavLink>
         </div>
       </div>
     </>

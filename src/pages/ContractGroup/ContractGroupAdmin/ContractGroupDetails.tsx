@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
+import { NavLink } from 'react-router-dom';
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -872,13 +873,15 @@ export default function ContractGroupDetail(props: any) {
           <div className="mt-5 flex mb-20">
             {viewButtonAdminAndExpertise}
             {viewButtonSale}
+            <NavLink to="/Admin/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
               variant="contained"
             >
-              HUỶ BỎ
+               QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>

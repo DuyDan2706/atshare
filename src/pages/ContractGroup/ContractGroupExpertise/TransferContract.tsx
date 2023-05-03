@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { NavLink } from 'react-router-dom';
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import {
@@ -1581,7 +1582,7 @@ export default function TransferContract(props: any) {
           <hr className="mt-2" />
           <div className="mt-5 flex mb-20">
             {ButtonView}
-
+            <NavLink to="/Expertise/ContractGroup" className="hover:underline">
             <Button
               color="inherit"
               className="btn-choose-car"
@@ -1589,6 +1590,7 @@ export default function TransferContract(props: any) {
             >
               QUAY LẠI
             </Button>
+            </NavLink>
           </div>
         </form>
       </div>
